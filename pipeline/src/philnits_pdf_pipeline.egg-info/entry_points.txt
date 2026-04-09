@@ -1,0 +1,2 @@
+[console_scripts]
+philnits-pipeline = pdf_pipeline.cli:main

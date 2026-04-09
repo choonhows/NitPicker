@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+src/pdf_pipeline/__init__.py
+src/pdf_pipeline/__main__.py
+src/pdf_pipeline/cli.py
+src/pdf_pipeline/extractor.py
+src/pdf_pipeline/models.py
+src/pdf_pipeline/parser.py
+src/pdf_pipeline/pipeline.py
+src/pdf_pipeline/writers.py
+src/philnits_pdf_pipeline.egg-info/PKG-INFO
+src/philnits_pdf_pipeline.egg-info/SOURCES.txt
+src/philnits_pdf_pipeline.egg-info/dependency_links.txt
+src/philnits_pdf_pipeline.egg-info/entry_points.txt
+src/philnits_pdf_pipeline.egg-info/requires.txt
+src/philnits_pdf_pipeline.egg-info/top_level.txt
