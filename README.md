@@ -1,6 +1,11 @@
 # NitPick
 
-NitPick is a React + TypeScript web app for FE exam preparation.
+NitPick is a React + TypeScript web app for FE exam preparation. 
+
+## NOTE
+this is a rush side project, there might be bugs but I intend to fix later, but for now, 
+just have fun and study <3
+
 
 It includes:
 - Mock exam generation from the question vault
@@ -76,8 +81,3 @@ npm run preview
 - src/assets : App assets used in components
 - public : Static files served directly (including favicon)
 - philnits-vault : Markdown question source files
-
-## Favicon Note
-
-The app favicon is served from public/picker.svg and linked from index.html.
-If your browser still shows the old icon, do a hard refresh.
