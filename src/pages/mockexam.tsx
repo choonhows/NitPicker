@@ -95,7 +95,7 @@ export default function MockExamPage(){
                     </div>
 
                     <div className='flex w-full justify-center'>
-                        <div className="grid grid-cols-4 md:grid-cols-1 md:gap-3 md:text-lg gap-5 ">
+                        <div className="grid grid-cols-4 md:text-lg gap-10 ">
                             <p>a) +0010</p>
                             <p>b) -1</p>
                             <p>c) 12.2</p>

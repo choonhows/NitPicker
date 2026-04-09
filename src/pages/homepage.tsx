@@ -44,7 +44,7 @@ export default function HomePage(){
             {/* HERO */}
             <div className="w-[95vw] h-[40vh] flex items-end justify-end px-8 py-4 border-r-5 border-black">
                 <div className="absolute h-[40vh] w-[90vw] flex items-center justify-start">
-                    <h1 className="text-[10rem] opacity-30">
+                    <h1 className="text-5xl lg:text-9xl  opacity-30">
                         PHILNITS NLNG GUD
                     </h1>
                 </div>
