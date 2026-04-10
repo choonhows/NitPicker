@@ -87,7 +87,7 @@ export default function MockExamResultsPage() {
                         <section className="flex flex-col items-stretch lg:items-start px-2 sm:px-4 md:px-10">
                             <div className="flex items-end gap-3 sm:gap-5">
                                 <h1 className="text-7xl sm:text-8xl md:text-9xl leading-none font-bold">{result.correctAnswers}</h1>
-                                <h1 className="font-semibold text-2xl sm:text-3xl text-black opacity-50 dark:text-white">/{result.totalQuestions}</h1>
+                                <h1 className="font-semibold text-2xl sm:text-3xl text-black opacity-50">/{result.totalQuestions}</h1>
                             </div>
                             <p className={`mt-3 text-lg sm:text-xl font-bold ${didPass ? "text-green-700" : "text-red-700"}`}>
                                 {didPass ? `We did it bro (${PASSING_PERCENTAGE}% or higher)` : `NT tried bro (below ${PASSING_PERCENTAGE}%)`}
@@ -311,7 +311,7 @@ export default function MockExamResultsPage() {
                                                             </div>
 
                                                             <div className="border-l-4 border-black pl-3 max-h-72 overflow-y-auto
-                                                                [&::-webkit-scrollbar]:w-[6px]
+                                                                [&::-webkit-scrollbar]:w-[3px]
                                                                 [&::-webkit-scrollbar-track]:bg-transparent
                                                                 [&::-webkit-scrollbar-thumb]:bg-black"
                                                                  style={{scrollbarColor: "black transparent", scrollbarWidth: "auto", direction: "rtl"}}
@@ -327,7 +327,7 @@ export default function MockExamResultsPage() {
                                                                                 {normalizeMathDelimiters(normalizeLegacySymbols(wrongQuestion.answerExplanation))}
                                                                             </ReactMarkdown>
                                                                         ) : (
-                                                                            <p>No detailed explanation available in the source markdown for this item.</p>
+                                                                            <p>No detailed explanatzion available in the source markdown for this item.</p>
                                                                         )}
                                                                     </div>
                                                                 </div>
