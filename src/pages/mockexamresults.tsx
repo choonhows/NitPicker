@@ -36,16 +36,16 @@ export default function MockExamResultsPage() {
     if (!result) {
         return (
             <>
-                <div className="py-10 md:py-0 min-h-screen flex w-full flex-col items-center bg-white gap-6 md:gap-10 select-none">
+                <div className="py-10 md:py-0 min-h-screen flex w-full flex-col items-center bg-white dark:bg-zinc-950 dark:text-white gap-6 md:gap-10 select-none">
                     <NavBar></NavBar>
                     <div className="flex-1 w-full flex items-center justify-center px-6 md:px-20">
-                        <div className="border-2 border-black p-8 md:p-10 w-full max-w-xl flex flex-col items-center gap-6 text-center">
+                        <div className="border-2 border-black dark:border-white p-8 md:p-10 w-full max-w-xl flex flex-col items-center gap-6 text-center">
                             <h1 className="text-3xl md:text-4xl font-bold">No exam result found</h1>
                             <p className="text-sm md:text-base opacity-75">Take a mock exam first so this page can display your score and breakdown.</p>
                             <button
                                 type="button"
                                 onClick={() => navigate("/mockexamprep")}
-                                className="border-2 border-black px-6 py-3 font-bold hover:bg-black hover:text-white transition-colors duration-200"
+                                className="border-2 border-black px-6 py-3 font-bold hover:bg-black hover:text-white transition-colors duration-200 dark:border-white dark:hover:bg-white dark:hover:text-black"
                             >
                                 GO TO MOCK EXAM PREP
                             </button>
@@ -80,7 +80,7 @@ export default function MockExamResultsPage() {
 
     return (
         <>
-            <div className="py-10 md:py-0 md:min-h-screen flex md:w-full flex-col items-center bg-white gap-4 md:gap-10 select-none">
+            <div className="py-10 md:py-0 md:min-h-screen flex md:w-full flex-col items-center bg-white dark:bg-zinc-950 dark:text-white gap-4 md:gap-10 select-none">
                 <NavBar></NavBar>
                 <div className="w-full min-h-[78vh] px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32 pb-10">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
@@ -212,14 +212,14 @@ export default function MockExamResultsPage() {
                                     <button
                                         type="button"
                                         onClick={() => navigate("/mockexamprep")}
-                                        className="w-full border-2 border-black bg-black text-white font-bold py-3 px-4 hover:bg-white hover:text-black transition-colors duration-200 cursor-pointer"
+                                        className="w-full border-2 border-black bg-black text-white font-bold py-3 px-4 hover:bg-white hover:text-black transition-colors duration-200 cursor-pointer dark:border-white dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white"
                                     >
                                         TAKE TEST AGAIN
                                     </button>
                                     <button
                                         type="button"
                                         onClick={() => navigate("/")}
-                                        className="w-full border-2 border-black bg-white text-black font-bold py-3 px-4 hover:bg-black hover:text-white transition-colors duration-200 cursor-pointer"
+                                        className="w-full border-2 border-black bg-white text-black font-bold py-3 px-4 hover:bg-black hover:text-white transition-colors duration-200 cursor-pointer dark:border-white dark:bg-zinc-950 dark:text-white dark:hover:bg-white dark:hover:text-black"
                                     >
                                         GO HOME
                                     </button>
@@ -239,7 +239,7 @@ export default function MockExamResultsPage() {
                                             const isOpen = Boolean(openWrongQuestions[wrongQuestion.id]);
 
                                             return (
-                                                <article key={wrongQuestion.id} className="border-2 border-black/20 bg-white">
+                                                <article key={wrongQuestion.id} className="border-2 border-black/20 dark:border-white/20 bg-white dark:bg-zinc-900">
                                                     <button
                                                         type="button"
                                                         onClick={() => toggleWrongQuestion(wrongQuestion.id)}
@@ -272,7 +272,7 @@ export default function MockExamResultsPage() {
                                                             isOpen ? "max-h-[40rem] opacity-100" : "max-h-0 opacity-0"
                                                         }`}
                                                     >
-                                                        <div className="px-3 md:px-4 pb-4 border-t border-black/10 flex flex-col gap-3">
+                                                        <div className="px-3 md:px-4 pb-4 border-t border-black/10 dark:border-white/10 flex flex-col gap-3">
                                                             <div className="pt-3 flex flex-col gap-2 text-sm md:text-base">
                                                                 <div>
                                                                     <p><span className="font-semibold">Your answer:</span></p>
@@ -310,7 +310,7 @@ export default function MockExamResultsPage() {
                                                                 </div>
                                                             </div>
 
-                                                            <div className="border-l-4 border-black pl-3">
+                                                            <div className="border-l-4 border-black dark:border-white pl-3">
                                                                 <p className="text-xs uppercase tracking-wide opacity-70 font-semibold">How to answer it</p>
                                                                 <div className="mt-1 text-sm md:text-base leading-relaxed prose prose-sm max-w-none prose-p:my-1">
                                                                     {wrongQuestion.answerExplanation ? (

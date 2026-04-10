@@ -251,17 +251,17 @@ export default function MockExamPage() {
     if (!session || !currentQuestion) {
         return (
             <>
-                <div className="py-10 md:py-0 min-h-screen flex w-full flex-col items-center bg-white gap-6 md:gap-10 select-none">
+                <div className="py-10 md:py-0 min-h-screen flex w-full flex-col items-center bg-white dark:bg-zinc-950 gap-6 md:gap-10 select-none">
                     <NavBar></NavBar>
                     <div className="flex-1 w-full flex items-center justify-center px-6 md:px-20">
-                        <div className="border-2 border-black p-8 md:p-10 w-full max-w-xl flex flex-col items-center gap-6 text-center">
+                        <div className="border-2 border-black dark:border-white p-8 md:p-10 w-full max-w-xl flex flex-col items-center gap-6 text-center dark:text-white">
                             <SmileySadIcon className="h-16 w-auto" weight="bold"></SmileySadIcon>
                             <h1 className="text-3xl md:text-4xl font-bold">No active mock exam found</h1>
                             <p className="text-sm md:text-base opacity-75">Start from the prep page so we can build an exam from your selected settings.</p>
                             <button
                                 type="button"
                                 onClick={() => navigate("/mockexamprep")}
-                                className="border-2 border-black px-6 py-3 font-bold hover:bg-black hover:text-white transition-colors duration-200"
+                                className="border-2 border-black px-6 py-3 font-bold hover:bg-black hover:text-white transition-colors duration-200 dark:border-white dark:hover:bg-white dark:hover:text-black"
                             >
                                 GO TO MOCK EXAM PREP
                             </button>
@@ -309,7 +309,7 @@ export default function MockExamPage() {
 
     return (
         <>
-            <div className="py-10 md:py-0 md:min-h-screen flex md:w-full flex-col items-center bg-white gap-4 md:gap-10 select-none">
+            <div className="py-10 md:py-0 md:min-h-screen flex md:w-full flex-col items-center bg-white dark:bg-zinc-950 dark:text-white gap-4 md:gap-10 select-none">
                 <NavBar></NavBar>
 
                 <div className="w-[79vw] md:w-full flex justify-between md:px-10 items-center">
@@ -346,7 +346,7 @@ export default function MockExamPage() {
                 </div>
 
                 <div className="md:min-h-[69vh] flex-col md:flex-row w-full flex items-center justify-between gap-10 md:gap-0 px-4 lg:px-20">
-                    <div className="flex flex-col md:w-1/2 md:max-w-5xl border-black md:p-6 gap-5 md:gap-6 bg-white text-black">
+                    <div className="flex flex-col md:w-1/2 md:max-w-5xl border-black dark:border-white md:p-6 gap-5 md:gap-6 bg-white dark:bg-zinc-950 text-black dark:text-white">
                         <div className="flex md:w-full justify-between items-center gap-4">
                             <div className="flex gap-1 items-center">
                                 <h1 className="font-extrabold md:text-3xl text-3xl">Q{currentIndex + 1}</h1>
@@ -365,7 +365,7 @@ export default function MockExamPage() {
                         </div>
 
                         {currentQuestion.tableText ? (
-                            <div className="border border-black/25 bg-black/2 p-3 md:p-4">
+                            <div className="border border-black/25 dark:border-white/25 bg-black/2 dark:bg-white/5 p-3 md:p-4">
                                 <p className="font-extrabold text-xs md:text-sm mb-2 tracking-wide">TABLE</p>
                                 <pre className="text-xs md:text-sm leading-relaxed whitespace-pre-wrap font-mono overflow-x-auto">{normalizeLegacySymbols(currentQuestion.tableText)}</pre>
                             </div>
@@ -425,7 +425,7 @@ export default function MockExamPage() {
                                     onClick={handleUseHint}
                                     disabled={hintVisible}
                                     className="font-extrabold md:px-5 md:py-2 px-5 py-2 border-2 md:h-15 w-35 disabled:opacity-40 disabled:cursor-not-allowed
-                                    hover:font-light hover:bg-black hover:text-white duration-150 cursor-pointer"
+                                    hover:font-light hover:bg-black hover:text-white duration-150 cursor-pointer dark:border-white dark:hover:bg-white dark:hover:text-black"
                                 >
                                     HINT
                                 </button>
@@ -469,7 +469,7 @@ export default function MockExamPage() {
                         </div>
 
                         {hintVisible ? (
-                            <p className="text-sm border-l-4 border-black pl-3">
+                            <p className="text-sm border-l-4 border-black dark:border-white pl-3">
                                 Hint used: {eliminatedOptionSet.size} incorrect {eliminatedOptionSet.size === 1 ? "option" : "options"} removed.
                             </p>
                         ) : null}
@@ -487,13 +487,13 @@ export default function MockExamPage() {
                                 <button
                                     type="button"
                                     onClick={handleToggleExplanation}
-                                    className="border-2 border-black py-2 px-4 text-sm md:text-base font-bold hover:bg-black hover:text-white transition-colors duration-200"
+                                    className="border-2 border-black py-2 px-4 text-sm md:text-base font-bold hover:bg-black hover:text-white transition-colors duration-200 dark:border-white dark:hover:bg-white dark:hover:text-black"
                                 >
                                     {explanationVisible ? "HIDE EXPLANATION" : "SHOW EXPLANATION"}
                                 </button>
 
                                 {explanationVisible ? (
-                                    <div className="border border-black/25 bg-black/5 p-3 md:p-4">
+                                    <div className="border border-black/25 dark:border-white/25 bg-black/5 dark:bg-white/5 p-3 md:p-4">
                                         <p className="font-extrabold text-xs md:text-sm mb-2 tracking-wide">HOW THIS IS ANSWERED</p>
                                         <div className="text-sm md:text-base leading-relaxed prose prose-sm max-w-none prose-p:my-1">
                                             <ReactMarkdown
@@ -524,16 +524,16 @@ export default function MockExamPage() {
                                         disabled={isDisabled}
                                         className={`duration-300 cursor-pointer px-5 py-7 md:px-10 md:py-5 md:text-2xl border ${
                                             !hasChoiceContent
-                                                ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                                                ? "bg-gray-200 text-gray-500 cursor-not-allowed dark:bg-zinc-800 dark:text-zinc-500"
                                                 : answerLockedForCurrentQuestion
                                                     ? isSelected
-                                                        ? "text-black bg-white border-black font-extrabold cursor-not-allowed"
-                                                        : "text-black/60 bg-white border-black/30 cursor-not-allowed"
+                                                        ? "text-black bg-white border-black font-extrabold cursor-not-allowed dark:text-white dark:bg-zinc-950 dark:border-white"
+                                                        : "text-black/60 bg-white border-black/30 cursor-not-allowed dark:text-white/60 dark:bg-zinc-950 dark:border-white/30"
                                                     : isEliminated
-                                                        ? "bg-gray-200 text-gray-500 border-black/20 cursor-not-allowed"
+                                                        ? "bg-gray-200 text-gray-500 border-black/20 cursor-not-allowed dark:bg-zinc-800 dark:text-zinc-500 dark:border-white/20"
                                                     : isSelected
-                                                        ? "text-black bg-white border-black font-extrabold"
-                                                        : "text-white bg-black border-white hover:text-black hover:bg-white hover:font-extrabold"
+                                                        ? "text-black bg-white border-black font-extrabold dark:text-white dark:bg-zinc-950 dark:border-white"
+                                                        : "text-white bg-black border-white hover:text-black hover:bg-white hover:font-extrabold dark:text-black dark:bg-white dark:border-black dark:hover:text-white dark:hover:bg-black"
                                         }`}
                                     >
                                         {letter}
@@ -545,7 +545,7 @@ export default function MockExamPage() {
                         <button
                             type="button"
                             onClick={handleNextQuestion}
-                            className="border-2 border-black py-3 font-bold hover:bg-black hover:text-white transition-colors duration-200"
+                            className="border-2 border-black py-3 font-bold hover:bg-black hover:text-white transition-colors duration-200 dark:border-white dark:hover:bg-white dark:hover:text-black"
                         >
                             NEXT QUESTION
                         </button>
@@ -553,7 +553,7 @@ export default function MockExamPage() {
                         <button
                             type="button"
                             onClick={() => finalizeExam()}
-                            className="border-2 border-black py-3 font-bold hover:bg-black hover:text-white transition-colors duration-200"
+                            className="border-2 border-black py-3 font-bold hover:bg-black hover:text-white transition-colors duration-200 dark:border-white dark:hover:bg-white dark:hover:text-black"
                         >
                             SUBMIT EXAM
                         </button>

@@ -368,14 +368,14 @@ export default function PreviousExamsPage() {
 
     return (
         <>
-            <div className="min-h-screen flex w-full flex-col items-center bg-white gap-8 md:gap-10 select-none py-8 md:py-0">
+            <div className="min-h-screen flex w-full flex-col items-center bg-white dark:bg-zinc-950 dark:text-white gap-8 md:gap-10 select-none py-8 md:py-0">
                 <NavBar></NavBar>
 
                 <main className="w-full px-4 md:px-10 lg:px-20 xl:px-28 pb-8 md:pb-12">
                     <div className="p-4 md:p-6 lg:p-8">
                         <h1 className="text-3xl md:text-5xl font-light">Previous Exam Questions</h1>
                         <p className="mt-3 text-sm md:text-base opacity-75 max-w-3xl">
-                            All of the questions by year, taken from <a href="https://github.com/usc-cisco/philnits-vault" className="underline text-black">philnits-vault</a> <br></br>
+                            All of the questions by year, taken from <a href="https://github.com/usc-cisco/philnits-vault" className="underline text-black dark:text-white">philnits-vault</a> <br></br>
                             These are the questions used in the mock exam simulation
                         </p>
 
@@ -384,7 +384,7 @@ export default function PreviousExamsPage() {
                                 const isYearOpen = Boolean(openYears[entry.year]);
 
                                 return (
-                                    <section key={entry.year} className="border-2 border-black/20">
+                                    <section key={entry.year} className="border-2 border-black/20 dark:border-white/20">
                                         <button
                                             type="button"
                                             onClick={() => toggleYear(entry.year)}
@@ -401,12 +401,12 @@ export default function PreviousExamsPage() {
                                         </button>
 
                                         {isYearOpen ? (
-                                            <div className="border-t border-black/20 p-3 md:p-4 flex flex-col gap-3">
+                                            <div className="border-t border-black/20 dark:border-white/20 p-3 md:p-4 flex flex-col gap-3">
                                                 {entry.questions.map((question) => {
                                                     const isQuestionOpen = Boolean(openQuestions[question.id]);
 
                                                     return (
-                                                        <article key={question.id} className="border border-black/20 bg-white">
+                                                        <article key={question.id} className="border border-black/20 dark:border-white/20 bg-white dark:bg-zinc-900">
                                                             <button
                                                                 type="button"
                                                                 onClick={() => toggleQuestion(question.id)}
@@ -435,7 +435,7 @@ export default function PreviousExamsPage() {
                                                             </button>
 
                                                             {isQuestionOpen ? (
-                                                                <div className="border-t border-black/10 px-3 pb-4 md:px-4">
+                                                                <div className="border-t border-black/10 dark:border-white/10 px-3 pb-4 md:px-4">
                                                                     {question.options.length > 0 ? (
                                                                         <div className="pt-3 flex flex-col gap-2">
                                                                             <p className="text-xs uppercase tracking-wide opacity-70">Choices</p>
@@ -471,7 +471,7 @@ export default function PreviousExamsPage() {
                                                                         </div>
                                                                     </div>
 
-                                                                    <div className="mt-3 border-l-4 border-black pl-3">
+                                                                    <div className="mt-3 border-l-4 border-black dark:border-white pl-3">
                                                                         <p className="text-xs uppercase tracking-wide opacity-70">How to answer it</p>
                                                                         <div className="text-sm md:text-base mt-1 leading-relaxed prose prose-sm max-w-none">
                                                                             {question.answerExplanation ? (

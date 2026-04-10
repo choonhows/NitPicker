@@ -29,7 +29,7 @@ export default function MockExamPrepPage() {
     return Boolean(session && session.questions.length > 0);
   });
   const [showResumeModal, setShowResumeModal] = useState(false);
-  const formControlClassName = "h-6 w-6 md:h-4 md:w-4 accent-black shrink-0 cursor-pointer";
+  const formControlClassName = "h-6 w-6 md:h-4 md:w-4 accent-black dark:accent-white shrink-0 cursor-pointer";
   const closeStartErrorModal = () => setStartError(null);
   const closeResumeModal = () => setShowResumeModal(false);
 
@@ -144,7 +144,7 @@ export default function MockExamPrepPage() {
     const isCategoryFullySelected = topics.every((topic) => selectedTopics.includes(topic));
 
     return (
-      <fieldset key={categoryName} className="border-2 p-3 lg:p-4">
+      <fieldset key={categoryName} className="border-2 p-3 lg:p-4 dark:border-white/30">
         <div className="mb-3">
           <label className="inline-flex items-center gap-3 py-1 text-base lg:text-lg font-medium cursor-pointer">
             <input
@@ -175,7 +175,7 @@ export default function MockExamPrepPage() {
 
   return (
     <>
-      <div className="min-h-screen flex w-full flex-col items-center bg-white gap-10 select-none py-10 md:py-0">
+      <div className="min-h-screen flex w-full flex-col items-center bg-white dark:bg-zinc-950 gap-10 select-none py-10 md:py-0">
         <NavBar></NavBar>
 
         <div className="min-h-[78vh] w-full flex flex-col lg:flex-row items-center  justify-between px-6 lg:px-20 gap-10">
@@ -184,17 +184,17 @@ export default function MockExamPrepPage() {
             <h1 className="-tracking-widest text-6xl lg:text-8xl">You ready?</h1>
             <button
               type="button"
-              onClick={handleStartExam}
-              className="flex py-6 lg:py-8 items-center justify-center border-2 duration-300 group hover:bg-black cursor-pointer"
+              onClick={() => handleStartExam()}
+              className="flex py-6 lg:py-8 items-center justify-center border-2 duration-300 group hover:bg-black dark:border-white dark:hover:bg-white cursor-pointer"
             >
-              <h1 className="text-2xl w-50 group-hover:text-white font-bold group-hover:font-light duration-300">
+              <h1 className="text-2xl w-50 group-hover:text-white font-bold group-hover:font-light duration-300 dark:text-white dark:group-hover:text-black">
                 LETS GO
               </h1>
             </button>
           </div>
 
-          <div className="border border-black h-[70vh] w-full lg:w-[52vw] flex flex-col overflow-hidden">
-            <div className="flex md:gap-10 border-b-2 py-7 md:py-0">
+          <div className="border border-black dark:border-white h-[70vh] w-full lg:w-[52vw] flex flex-col overflow-hidden">
+            <div className="flex md:gap-10 border-b-2 dark:border-white/30 py-7 md:py-0">
               
               <div className="p-4 lg:p-6 flex flex-col gap-4 flex-1">  
                 <h1 className="font-light text-3xl">Exam Type</h1>
@@ -203,7 +203,7 @@ export default function MockExamPrepPage() {
                     type="button"
                     onClick={() => setExamType("AM EXAM")}
                     className={`font-medium text-base lg:text-xl px-4 py-2 border-2 flex-1 duration-200 cursor-pointer ${
-                      examType === "AM EXAM" ? "bg-black text-white" : "bg-white text-black"
+                      examType === "AM EXAM" ? "bg-black text-white dark:bg-white dark:text-black" : "bg-white text-black dark:bg-zinc-950 dark:text-white"
                     }`}
                   >
                     AM EXAM
@@ -212,14 +212,14 @@ export default function MockExamPrepPage() {
                 </div>
               </div>
               
-              <div className="flex-1 flex flex-col items-center justify-center border-l-2 gap-4 px-2">
-                <p className="text-gray-700 text-center text-sm">
+              <div className="flex-1 flex flex-col items-center justify-center border-l-2 dark:border-white/30 gap-4 px-2">
+                <p className="text-gray-700 dark:text-gray-300 text-center text-sm">
                   If you want an actual exam simulation settings:
                 </p>
                 <button
                   type="button"
                   onClick={applyActualExamDefaults}
-                  className="border-2 py-2 px-4 font-extrabold duration-75 hover:bg-black hover:text-white hover:font-light cursor-pointer "
+                  className="border-2 py-2 px-4 font-extrabold duration-75 hover:bg-black hover:text-white hover:font-light cursor-pointer dark:border-white dark:hover:bg-white dark:hover:text-black"
                 >
                   ACTUAL EXAM
                 </button>
@@ -278,7 +278,7 @@ export default function MockExamPrepPage() {
                         
                         setDurationMinutes(clamped);
                       }}
-                      className = "border-2 px-3 py-2"
+                      className = "border-2 px-3 py-2 dark:border-white/50 dark:bg-zinc-800 dark:text-white"
                     />
                   </label>
                   <p className="text-xs opacity-70">Default: 90 minutes. Maximum: 180 minutes.</p>
@@ -310,7 +310,7 @@ export default function MockExamPrepPage() {
                         
                         setQuestionCount(clamped);
                       }}
-                      className = "border-2 px-3 py-2"
+                      className = "border-2 px-3 py-2 dark:border-white/50 dark:bg-zinc-800 dark:text-white"
                     />
                   </label>
                   <p className="text-xs opacity-70">Default: 80 questions. Maximum: 100 questions.</p>
@@ -362,10 +362,10 @@ export default function MockExamPrepPage() {
           onClick={closeStartErrorModal}
         >
           <div
-            className="w-full max-w-xl border-2 border-black bg-white p-6 md:p-8 shadow-2xl"
+            className="w-full max-w-xl border-2 border-black dark:border-white bg-white dark:bg-zinc-900 p-6 md:p-8 shadow-2xl"
             onClick={(event) => event.stopPropagation()}
           >
-            <h2 id="mock-exam-start-error-title" className="text-2xl md:text-3xl font-bold mb-3">
+            <h2 id="mock-exam-start-error-title" className="text-2xl md:text-3xl font-bold mb-3 dark:text-white">
               Unable to Start Mock Exam
             </h2>
             <p className="text-sm md:text-base text-red-700 leading-relaxed">{startError}</p>
@@ -374,7 +374,7 @@ export default function MockExamPrepPage() {
               <button
                 type="button"
                 onClick={closeStartErrorModal}
-                className="border-2 border-black px-5 py-2 font-bold hover:bg-black hover:text-white transition-colors duration-200"
+                className="border-2 border-black px-5 py-2 font-bold hover:bg-black hover:text-white transition-colors duration-200 dark:border-white dark:hover:bg-white dark:hover:text-black"
               >
                 CLOSE
               </button>
@@ -392,10 +392,10 @@ export default function MockExamPrepPage() {
           onClick={closeResumeModal}
         >
           <div
-            className="w-full max-w-xl border-2 border-black bg-white p-6 md:p-8 shadow-2xl"
+            className="w-full max-w-xl border-2 border-black dark:border-white bg-white dark:bg-zinc-900 p-6 md:p-8 shadow-2xl"
             onClick={(event) => event.stopPropagation()}
           >
-            <h2 id="mock-exam-resume-title" className="text-2xl md:text-3xl font-bold mb-3">
+            <h2 id="mock-exam-resume-title" className="text-2xl md:text-3xl font-bold mb-3 dark:text-white">
               Resume Mock Exam?
             </h2>
             <p className="text-sm md:text-base leading-relaxed opacity-80">
@@ -406,14 +406,14 @@ export default function MockExamPrepPage() {
               <button
                 type="button"
                 onClick={handleResumeExam}
-                className="border-2 border-black bg-black text-white px-5 py-2 font-bold hover:bg-white hover:text-black transition-colors duration-200"
+                className="border-2 border-black bg-black text-white px-5 py-2 font-bold hover:bg-white hover:text-black transition-colors duration-200 dark:border-white dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white"
               >
                 RESUME EXAM
               </button>
               <button
                 type="button"
                 onClick={() => handleStartExam(true)}
-                className="border-2 border-black px-5 py-2 font-bold hover:bg-black hover:text-white transition-colors duration-200"
+                className="border-2 border-black px-5 py-2 font-bold hover:bg-black hover:text-white transition-colors duration-200 dark:border-white dark:hover:bg-white dark:hover:text-black"
               >
                 START NEW EXAM
               </button>

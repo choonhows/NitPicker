@@ -200,12 +200,12 @@ const notesData = [
 
 export default function NotesPage() {
     return (
-        <div className="min-h-screen flex w-full flex-col items-center bg-white gap-5 select-none font-sans">
+        <div className="min-h-screen flex w-full flex-col items-center bg-white dark:bg-zinc-950 gap-5 select-none font-sans">
             <NavBar />
 
             <div className="h-[90vh] w-full flex flex-col items-center justify-center gap-4">
-                <h1 className="text-9xl">COMING SOON :)</h1>
-                <p className="text-sm opacity-70">{notesData.length} study topics are drafted and will be published here soon.</p>
+                <h1 className="text-9xl dark:text-white">COMING SOON :)</h1>
+                <p className="text-sm opacity-70 dark:text-white">{notesData.length} study topics are drafted and will be published here soon.</p>
             </div>
             
             {/* FOOTER PADDING */}

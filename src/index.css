@@ -1,3 +1,4 @@
+@variant dark (&:where(.dark, .dark *));
 @import "tailwindcss";
 
 :root {
@@ -53,6 +54,11 @@ body {
   display: block;
   background: #fff;
   color: #000;
+}
+
+html.dark body {
+  background: #09090b;
+  color: #fff;
 }
 
 /* Keep scroll behavior but hide visible scrollbars across browsers. */
