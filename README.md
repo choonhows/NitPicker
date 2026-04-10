@@ -1,6 +1,6 @@
-# NitPick
+# NitPicker
 
-NitPick is a React + TypeScript web app for FE exam preparation. 
+NitPicker is a React + TypeScript web app for Philnits FE exam preparation. 
 
 ## Warning
 this is a rush side project, there might be bugs but I intend to fix later, but for now, 
