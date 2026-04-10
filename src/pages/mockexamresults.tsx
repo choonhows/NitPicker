@@ -1,7 +1,7 @@
 import NavBar from "../components/navbar";
 import Footer from "../components/footer";
 import { CaretDownIcon } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
@@ -27,11 +27,60 @@ const normalizeMathDelimiters = (text: string): string =>
         .replace(/\\\((.+?)\\\)/gs, (_, expression: string) => `$${expression}$`)
         .replace(/\\\[(.+?)\\\]/gs, (_, expression: string) => `$$${expression}$$`);
 
+function BackToTopButton() {
+    const [showBackToTop, setShowBackToTop] = useState(false);
+    const [scrollProgress, setScrollProgress] = useState(0);
+
+    useEffect(() => {
+        const onScroll = () => {
+            const scrollTop = window.scrollY;
+            const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = scrollableHeight > 0 ? Math.round((scrollTop / scrollableHeight) * 100) : 0;
+            const nextShowBackToTop = scrollTop > window.innerHeight;
+            const nextProgress = Math.min(100, Math.max(0, progress));
+
+            setShowBackToTop((current) => (current === nextShowBackToTop ? current : nextShowBackToTop));
+            setScrollProgress((current) => (current === nextProgress ? current : nextProgress));
+        };
+
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener("scroll", onScroll);
+        };
+    }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    return (
+        <div
+            className={`fixed bottom-6 right-6 z-50 flex flex-col items-center gap-2 transition-all duration-200 ${
+                showBackToTop ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-2 pointer-events-none"
+            }`}
+        >
+            <p className="text-xs font-bold px-2 py-1 border border-black/30 dark:border-white/30 bg-white/90 text-black dark:bg-zinc-900/90 dark:text-white rounded-md">
+                {scrollProgress}%
+            </p>
+            <button
+                type="button"
+                onClick={scrollToTop}
+                aria-label="Back to top"
+                className="border-2 rounded-3xl border-black dark:border-white bg-black text-white dark:bg-white dark:text-black px-4 py-2 text-sm font-bold"
+            >
+                TOP
+            </button>
+        </div>
+    );
+}
+
 export default function MockExamResultsPage() {
     const [openCategories, setOpenCategories] = useState<Record<string, boolean>>({});
     const [openWrongQuestions, setOpenWrongQuestions] = useState<Record<string, boolean>>({});
     const navigate = useNavigate();
-    const result = loadMockExamResult();
+    const [result] = useState(() => loadMockExamResult());
 
     if (!result) {
         return (
@@ -80,7 +129,7 @@ export default function MockExamResultsPage() {
 
     return (
         <>
-            <div className="py-10 md:py-0 md:min-h-screen flex md:w-full flex-col items-center bg-white dark:bg-zinc-950 dark:text-white gap-4 md:gap-10 select-none">
+            <div className="py-10 md:py-0 min-h-screen flex w-full flex-col items-center bg-white dark:bg-zinc-950 dark:text-white gap-4 md:gap-10 select-none">
                 <NavBar></NavBar>
                 <div className="w-full min-h-[78vh] px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32 pb-10">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
@@ -347,6 +396,8 @@ export default function MockExamResultsPage() {
                 </div>
                 <Footer></Footer>
             </div>
+
+            <BackToTopButton />
         </>
     );
 }
