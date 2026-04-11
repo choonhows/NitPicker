@@ -5,9 +5,13 @@ import { useNavigate } from "react-router-dom";
 import Lenis from "lenis";
 import NavBar from '../components/navbar';
 import Footer from '../components/footer';
+import Logo from '../assets/picker.svg'
+import LogoDark from '../assets/picker-dark.svg'
+import { useTheme } from "../hooks/useTheme";
 
 export default function HomePage(){
     const navigate = useNavigate()
+    const { isDark } = useTheme()
 
     useEffect(() => {
         const lenis = new Lenis({
@@ -79,21 +83,23 @@ export default function HomePage(){
             </div>
 
             <div className="h-[90vh] w-screen flex md:hidden items-center justify-center flex-col">
+                
+                <img src= {isDark ? LogoDark : Logo} alt="NitPicker logo" className='h-26 w-auto mb-5' />
+
                 <h1 className="text-3xl px-10 text-center font-light text-black dark:text-white">
-                    Features such as previous exams and notes are not available on mobile devices 
+                    Welcome to NitPicker! 
                 </h1>
-                <h1 className="text-xl font-bold opacity-50 text-black dark:text-white">
-                    yet... :)
-                </h1>
+                
+                <button className="text-2xl font-light text-white bg-black dark:text-black dark:bg-white h-20 w-40 mt-10" onClick={() => navigate('/mockexamprep')}>
+                    MOCK EXAM
+                </button>
 
                 <button className="text-2xl font-light text-white bg-black dark:text-black dark:bg-white h-20 w-40 mt-10" onClick={() => navigate('/mockexamprep')}>
-                    PROCEED TO MOCK EXAM
+                    PREVIOUS EXAMS
                 </button>   
             </div>
 
-            <div className="">
-
-            </div>
+            
 
             {/* FOOTER */}
             <Footer></Footer>
