@@ -3,11 +3,10 @@ import type { ComponentType } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Lenis from "lenis";
-import NavBar from '../components/navbar';
-import Footer from '../components/footer';
 import Logo from '../assets/picker.svg'
 import LogoDark from '../assets/picker-dark.svg'
 import { useTheme } from "../hooks/useTheme";
+import Layout from "../components/Layout";
 
 export default function HomePage(){
     const navigate = useNavigate()
@@ -35,11 +34,7 @@ export default function HomePage(){
     }, [])
 
     return(
-        <>
-        <div className="min-h-screen flex w-full flex-col items-center bg-white dark:bg-zinc-950 py-10 md:py-0 select-none">
-            {/* NAV BAR */}
-            <NavBar></NavBar>
-            
+        <Layout className="py-10 md:py-0 select-none">
             {/* HERO */}
             <div className="w-[95vw] h-[40vh] md:flex items-end justify-end px-8 py-4 border-r-5 border-black dark:border-white hidden ">
                 <div className="absolute h-[40vh] w-[90vw] flex items-center justify-start">
@@ -94,17 +89,28 @@ export default function HomePage(){
                     MOCK EXAM
                 </button>
 
-                <button className="text-2xl font-light text-white bg-black dark:text-black dark:bg-white h-20 w-40 mt-10" onClick={() => navigate('/mockexamprep')}>
+                <button
+                    type="button"
+                    className="text-2xl font-light text-white bg-black dark:text-black dark:bg-white h-20 w-40 mt-10"
+                    onClick={() => navigate('/mockexamprep')}
+                    aria-label="Proceed to mock exam prep"
+                >
+                    MOCK EXAM
+                </button>
+
+                <button
+                    type="button"
+                    className="text-2xl font-light text-white bg-black dark:text-black dark:bg-white h-20 w-40 mt-10"
+                    onClick={() => navigate('/previousexams')}
+                    aria-label="Proceed to previous exams"
+                >
                     PREVIOUS EXAMS
-                </button>   
+                </button>
             </div>
 
             
 
-            {/* FOOTER */}
-            <Footer></Footer>
-        </div>
-        </>
+        </Layout>
     )
 }
 

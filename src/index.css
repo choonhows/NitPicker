@@ -1,5 +1,6 @@
 @variant dark (&:where(.dark, .dark *));
 @import "tailwindcss";
+@import "./styles/components.css";
 
 :root {
   --text: #6b6375;
@@ -30,6 +31,20 @@
   @media (max-width: 1024px) {
     font-size: 16px;
   }
+}
+
+html.dark {
+  --text: #d0ccd6;
+  --text-h: #f5f2f9;
+  --bg: #09090b;
+  --border: #2a282f;
+  --code-bg: #1a191f;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.15);
+  --accent-border: rgba(170, 59, 255, 0.6);
+  --social-bg: rgba(26, 25, 31, 0.8);
+  --shadow:
+    rgba(0, 0, 0, 0.3) 0 10px 15px -3px, rgba(0, 0, 0, 0.2) 0 4px 6px -2px;
 }
 
 html,
@@ -83,6 +98,22 @@ html.dark body {
 
   p {
     margin: 0;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

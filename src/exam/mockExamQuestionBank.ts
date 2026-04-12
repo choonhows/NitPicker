@@ -288,7 +288,7 @@ const parseMarkdownQuestion = (sourcePath: string, rawMarkdown: string): ParsedV
   const bodyLines = lines.slice(headingIndex + 1, delimiterIndex);
   const containsMarkdownTable = bodyLines.some((line) => {
     const trimmed = line.trim();
-    return /^\|.+\|$/.test(trimmed) || (/^[\s:|\-]+$/.test(trimmed) && trimmed.includes("|"));
+    return /^\|.+\|$/.test(trimmed) || (/^[\s:|-]+$/.test(trimmed) && trimmed.includes("|"));
   });
   const questionParts: string[] = [];
   const optionLines: string[] = [];

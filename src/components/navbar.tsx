@@ -5,11 +5,27 @@ import { Link } from 'react-router-dom'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from '../hooks/useTheme'
 import { ListIcon } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function NavBar(){
     const { isDark, toggle } = useTheme()
     const [isOpen, setNav] = useState<"Open" | "Close">("Close");
+
+    // Close menu on Escape key
+    useEffect(() => {
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                setNav("Close");
+            }
+        };
+        
+        if (isOpen === "Open") {
+            window.addEventListener('keydown', handleEscape);
+            return () => window.removeEventListener('keydown', handleEscape);
+        }
+    }, [isOpen]);
+
+    const closeMenu = () => setNav("Close");
 
     return (
         <>
@@ -51,16 +67,16 @@ export default function NavBar(){
 
             <div className={`${isOpen === "Open" ? "opacity-100 backdrop-blur-2xl" : "opacity-0 backdrop-blur-none pointer-events-none"} fixed inset-0 z-10 dark:bg-black/54 bg-white/54 duration-300 transition-all ease-in-out flex items-center justify-center flex-col gap-12` }> 
                 <div className="px-2 py-1 group hover:bg-black dark:hover:bg-white transition-all duration-300">
-                    <Link to="/" className="text-xl font-bold group-hover:text-white dark:group-hover:text-black transition-all duration-300">HOME</Link>
+                    <Link to="/" onClick={closeMenu} className="text-xl font-bold group-hover:text-white dark:group-hover:text-black transition-all duration-300">HOME</Link>
                 </div>
                 <div className="px-2 py-1 group hover:bg-black dark:hover:bg-white transition-all duration-300">
-                    <h1 className="text-xl font-bold group-hover:text-white dark:group-hover:text-black opacity-30 transition-all duration-300">NOTES</h1>
+                    <span className="text-xl font-bold group-hover:text-white dark:group-hover:text-black opacity-30 transition-all duration-300">NOTES</span>
                 </div>
                 <div className="px-2 py-1 group hover:bg-black dark:hover:bg-white transition-all duration-300">
-                    <Link to="/mockexam" className="text-xl font-bold group-hover:text-white dark:group-hover:text-black transition-all duration-300">MOCK EXAM</Link>
+                    <Link to="/mockexam" onClick={closeMenu} className="text-xl font-bold group-hover:text-white dark:group-hover:text-black transition-all duration-300">MOCK EXAM</Link>
                 </div>
                 <div className="px-2 py-1 group hover:bg-black dark:hover:bg-white transition-all duration-300">
-                    <Link to="/previousexams" className="text-xl font-bold group-hover:text-white dark:group-hover:text-black transition-all duration-300">PREVIOUS EXAMS</Link>
+                    <Link to="/previousexams" onClick={closeMenu} className="text-xl font-bold group-hover:text-white dark:group-hover:text-black transition-all duration-300">PREVIOUS EXAMS</Link>
                 </div>
                 <button
                     type="button"

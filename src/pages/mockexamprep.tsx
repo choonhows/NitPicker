@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import NavBar from "../components/navbar";
-import Footer from "../components/footer";
+import Layout from "../components/Layout";
+import LoadingSpinner from "../components/LoadingSpinner";
+import SkeletonLoader from "../components/SkeletonLoader";
 import {
   allTopics,
   categoryTopics,
@@ -13,14 +14,16 @@ import {
   type MockExamSettings,
 } from "../exam/mockExamModel";
 import { buildMockExamSession } from "../exam/mockExamQuestionBank";
+import { UI_LIMITS } from "../config/constants";
+import { trackEvent } from "../lib/analytics";
 
 // This is a temporary page to show the exam maker page
 export default function MockExamPrepPage() {
   const navigate = useNavigate();
   const [examType, setExamType] = useState<"AM EXAM" | "PM EXAM">("AM EXAM");
   const [isTimed, setIsTimed] = useState(true);
-  const [durationMinutes, setDurationMinutes] = useState<number | ''>(90);
-  const [questionCount, setQuestionCount] = useState<number | ''>(80);
+  const [durationMinutes, setDurationMinutes] = useState<number>(UI_LIMITS.defaultDurationMinutes);
+  const [questionCount, setQuestionCount] = useState<number>(UI_LIMITS.defaultQuestionCount);
   const [instantAnswers, setInstantAnswers] = useState(false);
   const [selectedTopics, setSelectedTopics] = useState<string[]>(allTopics);
   const [startError, setStartError] = useState<string | null>(null);
@@ -29,13 +32,17 @@ export default function MockExamPrepPage() {
     return Boolean(session && session.questions.length > 0);
   });
   const [showResumeModal, setShowResumeModal] = useState(false);
+  const [isStartingExam, setIsStartingExam] = useState(false);
   const formControlClassName = "h-6 w-6 md:h-4 md:w-4 accent-black dark:accent-white shrink-0 cursor-pointer";
   const closeStartErrorModal = () => setStartError(null);
   const closeResumeModal = () => setShowResumeModal(false);
 
   const handleStartExam = (forceStartNew = false) => {
+    setIsStartingExam(true);
+
     if (hasActiveSession && !forceStartNew) {
       setShowResumeModal(true);
+      setIsStartingExam(false);
       return;
     }
 
@@ -43,16 +50,6 @@ export default function MockExamPrepPage() {
       clearMockExamSession();
       setHasActiveSession(false);
       setShowResumeModal(false);
-    }
-    
-    if (questionCount === '') {
-      setStartError("Please enter the number of questions");
-      return;
-    }
-    
-    if (durationMinutes === '') {
-      setStartError("Please enter the timer duration");
-      return;
     }
     
     const safeQuestionCount = questionCount;
@@ -71,6 +68,7 @@ export default function MockExamPrepPage() {
 
     if (session.questions.length === 0) {
       setStartError("No questions match your current filters. Try selecting more topics.");
+      setIsStartingExam(false);
       return;
     }
 
@@ -78,6 +76,7 @@ export default function MockExamPrepPage() {
       setStartError(
         `Only ${session.questions.length} matching questions are available. Reduce the question count or broaden topic selection.`,
       );
+      setIsStartingExam(false);
       return;
     }
 
@@ -85,6 +84,11 @@ export default function MockExamPrepPage() {
     clearMockExamResult();
     saveMockExamSession(session);
     setHasActiveSession(true);
+    trackEvent('exam_started', {
+      exam_type: examType,
+      question_count: safeQuestionCount,
+      timed: isTimed,
+    })
     navigate("/mockexam");
   };
 
@@ -95,8 +99,8 @@ export default function MockExamPrepPage() {
 
   const applyActualExamDefaults = () => {
     setIsTimed(true);
-    setDurationMinutes(90);
-    setQuestionCount(80);
+    setDurationMinutes(UI_LIMITS.defaultDurationMinutes);
+    setQuestionCount(UI_LIMITS.defaultQuestionCount);
     setInstantAnswers(false);
     setSelectedTopics(allTopics);
   };
@@ -175,8 +179,7 @@ export default function MockExamPrepPage() {
 
   return (
     <>
-      <div className="min-h-screen flex w-full flex-col items-center bg-white dark:bg-zinc-950 gap-10 select-none py-10 md:py-0">
-        <NavBar></NavBar>
+      <Layout className="gap-10 select-none py-10 md:py-0">
 
         <div className="min-h-[78vh] w-full flex flex-col lg:flex-row items-center  justify-between px-6 lg:px-20 gap-10">
           
@@ -185,12 +188,14 @@ export default function MockExamPrepPage() {
             <button
               type="button"
               onClick={() => handleStartExam()}
+              disabled={isStartingExam}
               className="flex py-6 lg:py-8 items-center justify-center border-2 duration-300 group hover:bg-black dark:border-white dark:hover:bg-white cursor-pointer"
             >
               <h1 className="text-2xl w-50 group-hover:text-white font-bold group-hover:font-light duration-300 dark:text-white dark:group-hover:text-black">
-                LETS GO
+                {isStartingExam ? "BUILDING..." : "LETS GO"}
               </h1>
             </button>
+            {isStartingExam ? <LoadingSpinner label="Building exam session" /> : null}
           </div>
 
           <div className="border border-black dark:border-white h-[70vh] w-full lg:w-[52vw] flex flex-col overflow-hidden">
@@ -263,25 +268,22 @@ export default function MockExamPrepPage() {
                       onChange = {(e) => {
                         const value = e.target.value;
                         
-                        if (value === "") {
-                          setDurationMinutes('');
+                        const numericOnly = value.replace(/\D/g, "");
+                        if (!numericOnly) {
+                          setDurationMinutes(UI_LIMITS.defaultDurationMinutes);
                           return;
                         }
                         
-                        if (!/^\d+$/.test(value)) {
-                          return;
-                        }
+                        const parsedCount = Number(numericOnly);
                         
-                        const parsedCount = Number(value);
-                        
-                        const clamped = Math.min(180, Math.max(1, parsedCount));
+                        const clamped = Math.min(UI_LIMITS.maxDurationMinutes, Math.max(1, parsedCount));
                         
                         setDurationMinutes(clamped);
                       }}
-                      className = "border-2 px-3 py-2 dark:border-white/50 dark:bg-zinc-800 dark:text-white"
+                      className="form-input"
                     />
                   </label>
-                  <p className="text-xs opacity-70">Default: 90 minutes. Maximum: 180 minutes.</p>
+                  <p className="text-xs opacity-70">Default: {UI_LIMITS.defaultDurationMinutes} minutes. Maximum: {UI_LIMITS.maxDurationMinutes} minutes.</p>
                 </section>
                 
                 {/* QUESTIONS */}
@@ -295,25 +297,22 @@ export default function MockExamPrepPage() {
                       onChange={(e) => {
                         const value = e.target.value;
                         
-                        if (value === "") {
-                          setQuestionCount('');
+                        const numericOnly = value.replace(/\D/g, "");
+                        if (!numericOnly) {
+                          setQuestionCount(UI_LIMITS.defaultQuestionCount);
                           return;
                         }
                         
-                        if (!/^\d+$/.test(value)) {
-                          return;
-                        }
+                        const parsedCount = Number(numericOnly);
                         
-                        const parsedCount = Number(value);
-                        
-                        const clamped = Math.min(100, Math.max(1, parsedCount));
+                        const clamped = Math.min(UI_LIMITS.maxQuestionCount, Math.max(1, parsedCount));
                         
                         setQuestionCount(clamped);
                       }}
-                      className = "border-2 px-3 py-2 dark:border-white/50 dark:bg-zinc-800 dark:text-white"
+                      className="form-input"
                     />
                   </label>
-                  <p className="text-xs opacity-70">Default: 80 questions. Maximum: 100 questions.</p>
+                  <p className="text-xs opacity-70">Default: {UI_LIMITS.defaultQuestionCount} questions. Maximum: {UI_LIMITS.maxQuestionCount} questions.</p>
                 </section>
               </div>
               
@@ -336,6 +335,8 @@ export default function MockExamPrepPage() {
                   Default: all topics selected. At least one topic must stay selected.
                 </p>
 
+                {isStartingExam ? <SkeletonLoader lines={5} /> : null}
+
                 <div className="flex flex-col lg:grid lg:grid-cols-[1.2fr_1fr] gap-4 items-start">
                   <div className="w-full">{renderCategoryFieldset("Technology")}</div>
                   <div className="w-full flex flex-col gap-4">
@@ -350,19 +351,18 @@ export default function MockExamPrepPage() {
           </div>
         </div>
 
-        <Footer></Footer>
-      </div>
+      </Layout>
 
       {startError ? (
         <div
-          className="fixed inset-0 z-999 flex items-center justify-center bg-black/45 backdrop-blur-md px-4"
+          className="modal-overlay"
           role="dialog"
           aria-modal="true"
           aria-labelledby="mock-exam-start-error-title"
           onClick={closeStartErrorModal}
         >
           <div
-            className="w-full max-w-xl border-2 border-black dark:border-white bg-white dark:bg-zinc-900 p-6 md:p-8 shadow-2xl"
+            className="modal-panel"
             onClick={(event) => event.stopPropagation()}
           >
             <h2 id="mock-exam-start-error-title" className="text-2xl md:text-3xl font-bold mb-3 dark:text-white">
@@ -374,7 +374,7 @@ export default function MockExamPrepPage() {
               <button
                 type="button"
                 onClick={closeStartErrorModal}
-                className="border-2 border-black px-5 py-2 font-bold hover:bg-black hover:text-white transition-colors duration-200 dark:border-white dark:hover:bg-white dark:hover:text-black"
+                className="btn-outline px-5 py-2"
               >
                 CLOSE
               </button>
@@ -385,14 +385,14 @@ export default function MockExamPrepPage() {
 
       {showResumeModal ? (
         <div
-          className="fixed inset-0 z-999 flex items-center justify-center bg-black/45 backdrop-blur-md px-4"
+          className="modal-overlay"
           role="dialog"
           aria-modal="true"
           aria-labelledby="mock-exam-resume-title"
           onClick={closeResumeModal}
         >
           <div
-            className="w-full max-w-xl border-2 border-black dark:border-white bg-white dark:bg-zinc-900 p-6 md:p-8 shadow-2xl"
+            className="modal-panel"
             onClick={(event) => event.stopPropagation()}
           >
             <h2 id="mock-exam-resume-title" className="text-2xl md:text-3xl font-bold mb-3 dark:text-white">
@@ -406,14 +406,14 @@ export default function MockExamPrepPage() {
               <button
                 type="button"
                 onClick={handleResumeExam}
-                className="border-2 border-black bg-black text-white px-5 py-2 font-bold hover:bg-white hover:text-black transition-colors duration-200 dark:border-white dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white"
+                className="btn-solid px-5 py-2"
               >
                 RESUME EXAM
               </button>
               <button
                 type="button"
                 onClick={() => handleStartExam(true)}
-                className="border-2 border-black px-5 py-2 font-bold hover:bg-black hover:text-white transition-colors duration-200 dark:border-white dark:hover:bg-white dark:hover:text-black"
+                className="btn-outline px-5 py-2"
               >
                 START NEW EXAM
               </button>

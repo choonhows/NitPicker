@@ -1,5 +1,3 @@
-import NavBar from "../components/navbar";
-import Footer from "../components/footer";
 import { CaretDownIcon } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
@@ -8,24 +6,12 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import { useNavigate } from "react-router-dom";
 import { formatClockFromSeconds, loadMockExamResult } from "../exam/mockExamModel";
+import Layout from "../components/Layout";
+import { normalizeLegacySymbols, normalizeMathDelimiters } from "../lib/textFormat";
+import { trackEvent } from "../lib/analytics";
 import "katex/dist/katex.min.css";
 
 const PASSING_PERCENTAGE = 60;
-
-const normalizeLegacySymbols = (text: string): string =>
-    text
-        .replace(/\uF0AE|\uF0E0/g, "→")
-        .replace(/\uF0DF/g, "←")
-        .replace(/\uF0A3/g, "≤")
-        .replace(/\uF0B3/g, "≥")
-        .replace(/\uF0B8/g, "÷")
-        .replace(/\uF0B4/g, "×")
-        .replace(/\uF0B9/g, "≠");
-
-const normalizeMathDelimiters = (text: string): string =>
-    text
-        .replace(/\\\((.+?)\\\)/gs, (_, expression: string) => `$${expression}$`)
-        .replace(/\\\[(.+?)\\\]/gs, (_, expression: string) => `$$${expression}$$`);
 
 function BackToTopButton() {
     const [showBackToTop, setShowBackToTop] = useState(false);
@@ -82,11 +68,26 @@ export default function MockExamResultsPage() {
     const navigate = useNavigate();
     const [result] = useState(() => loadMockExamResult());
 
+    const totalQuestions = result?.totalQuestions ?? 0;
+    const correctAnswers = result?.correctAnswers ?? 0;
+    const rawScorePercentage = totalQuestions === 0 ? 0 : (correctAnswers / totalQuestions) * 100;
+    const scorePercentage = Number(rawScorePercentage.toFixed(1));
+    const didPass = rawScorePercentage >= PASSING_PERCENTAGE;
+
+    useEffect(() => {
+        if (!result) {
+            return
+        }
+        trackEvent('results_viewed', {
+            score_percentage: scorePercentage,
+            total_questions: totalQuestions,
+            passed: didPass,
+        })
+    }, [result, scorePercentage, totalQuestions, didPass]);
+
     if (!result) {
         return (
-            <>
-                <div className="py-10 md:py-0 min-h-screen flex w-full flex-col items-center bg-white dark:bg-zinc-950 dark:text-white gap-6 md:gap-10 select-none">
-                    <NavBar></NavBar>
+            <Layout className="py-10 md:py-0 dark:text-white gap-6 md:gap-10 select-none">
                     <div className="flex-1 w-full flex items-center justify-center px-6 md:px-20">
                         <div className="border-2 border-black dark:border-white p-8 md:p-10 w-full max-w-xl flex flex-col items-center gap-6 text-center">
                             <h1 className="text-3xl md:text-4xl font-bold">No exam result found</h1>
@@ -100,17 +101,12 @@ export default function MockExamResultsPage() {
                             </button>
                         </div>
                     </div>
-                    <Footer></Footer>
-                </div>
-            </>
+            </Layout>
         );
     }
 
     const totalTime = formatClockFromSeconds(result.totalTimeSeconds, true);
     const averageTimePerQuestion = formatClockFromSeconds(result.averageTimePerQuestionSeconds, false);
-    const rawScorePercentage = result.totalQuestions === 0 ? 0 : (result.correctAnswers / result.totalQuestions) * 100;
-    const scorePercentage = Number(rawScorePercentage.toFixed(1));
-    const didPass = rawScorePercentage >= PASSING_PERCENTAGE;
     const wrongQuestions = result.wrongQuestions ?? [];
 
     const toggleCategory = (categoryName: string) => {
@@ -129,8 +125,7 @@ export default function MockExamResultsPage() {
 
     return (
         <>
-            <div className="py-10 md:py-0 min-h-screen flex w-full flex-col items-center bg-white dark:bg-zinc-950 dark:text-white gap-4 md:gap-10 select-none">
-                <NavBar></NavBar>
+            <Layout className="py-10 md:py-0 dark:text-white gap-4 md:gap-10 select-none">
                 <div className="w-full min-h-[78vh] px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32 pb-10">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
                         <section className="flex flex-col items-stretch lg:items-start px-2 sm:px-4 md:px-10">
@@ -398,8 +393,7 @@ export default function MockExamResultsPage() {
                         </section>
                     </div>
                 </div>
-                <Footer></Footer>
-            </div>
+            </Layout>
 
             <BackToTopButton />
         </>

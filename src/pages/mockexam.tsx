@@ -1,11 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
-import NavBar from "../components/navbar";
-import Footer from "../components/footer";
+import Layout from "../components/Layout";
+import { MOCK_EXAM_IMAGE_BASE_PATH } from "../config/constants";
+import { normalizeLegacySymbols, normalizeMathDelimiters } from "../lib/textFormat";
+import { trackEvent } from "../lib/analytics";
 import { CaretLeftIcon, CaretRightIcon, PauseCircleIcon, PlayCircleIcon, EyeSlashIcon, EyeIcon, SmileySadIcon } from "@phosphor-icons/react";
 import {
     clearMockExamSession,
@@ -24,23 +26,8 @@ const resolveChoiceImageUrl = (imagePath: string): string => {
         return normalizedPath;
     }
 
-    return `/pipeline/outputs-all/${normalizedPath}`;
+    return `${MOCK_EXAM_IMAGE_BASE_PATH}${normalizedPath}`;
 };
-
-const normalizeLegacySymbols = (text: string): string =>
-    text
-        .replace(/\uF0AE|\uF0E0/g, "→")
-        .replace(/\uF0DF/g, "←")
-        .replace(/\uF0A3/g, "≤")
-        .replace(/\uF0B3/g, "≥")
-        .replace(/\uF0B8/g, "÷")
-        .replace(/\uF0B4/g, "×")
-        .replace(/\uF0B9/g, "≠");
-
-const normalizeMathDelimiters = (text: string): string =>
-    text
-        .replace(/\\\((.+?)\\\)/gs, (_, expression: string) => `$${expression}$`)
-        .replace(/\\\[(.+?)\\\]/gs, (_, expression: string) => `$$${expression}$$`);
 
 export default function MockExamPage() {
     const navigate = useNavigate();
@@ -68,7 +55,7 @@ export default function MockExamPage() {
     const isTimed = session?.settings.isTimed ?? false;
     const totalDurationSeconds = (session?.settings.durationMinutes ?? 0) * 60;
 
-    const finalizeExam = (forcedElapsedSeconds?: number) => {
+    const finalizeExam = useCallback((forcedElapsedSeconds?: number) => {
         if (!session || hasFinalizedRef.current) {
             return;
         }
@@ -78,10 +65,17 @@ export default function MockExamPage() {
         const totalExamSeconds = Math.max(0, Math.floor(forcedElapsedSeconds ?? elapsedSeconds));
         const result = computeMockExamResult(session, answers, totalExamSeconds, hintsUsed);
 
+        trackEvent('exam_completed', {
+            score: result.correctAnswers,
+            total_questions: result.totalQuestions,
+            duration_seconds: result.totalTimeSeconds,
+            passed: result.totalQuestions > 0 && result.correctAnswers / result.totalQuestions >= 0.6,
+        });
+
         saveMockExamResult(result);
         clearMockExamSession();
         navigate("/mockexamresults");
-    };
+    }, [session, answers, elapsedSeconds, hintsUsed, navigate]);
 
     useEffect(() => {
         if (!session || hasFinalizedRef.current || isOverallTimerPaused) {
@@ -96,10 +90,6 @@ export default function MockExamPage() {
     }, [session, isOverallTimerPaused]);
 
     useEffect(() => {
-        setQuestionElapsedSeconds(0);
-    }, [currentQuestion?.id]);
-
-    useEffect(() => {
         if (!currentQuestion || isQuestionTimerPaused) {
             return;
         }
@@ -109,7 +99,7 @@ export default function MockExamPage() {
         }, 1000);
 
         return () => window.clearInterval(timerId);
-    }, [currentQuestion?.id, isQuestionTimerPaused]);
+    }, [currentQuestion, isQuestionTimerPaused]);
 
     useEffect(() => {
         if (!session || !isTimed || hasFinalizedRef.current || totalDurationSeconds <= 0) {
@@ -119,7 +109,7 @@ export default function MockExamPage() {
         if (elapsedSeconds >= totalDurationSeconds) {
             finalizeExam(totalDurationSeconds);
         }
-    }, [elapsedSeconds, isTimed, session, totalDurationSeconds]);
+    }, [elapsedSeconds, isTimed, session, totalDurationSeconds, finalizeExam]);
 
     useEffect(() => {
         if (!session) {
@@ -137,6 +127,7 @@ export default function MockExamPage() {
     const moveToQuestion = (nextIndex: number) => {
         const boundedIndex = Math.max(0, Math.min(totalQuestions - 1, nextIndex));
         setCurrentIndex(boundedIndex);
+        setQuestionElapsedSeconds(0);
     };
 
     const handleNextQuestion = () => {
@@ -250,9 +241,7 @@ export default function MockExamPage() {
 
     if (!session || !currentQuestion) {
         return (
-            <>
-                <div className="py-10 md:py-0 min-h-screen flex w-full flex-col items-center bg-white dark:bg-zinc-950 gap-6 md:gap-10 select-none">
-                    <NavBar></NavBar>
+            <Layout className="py-10 md:py-0 gap-6 md:gap-10 select-none">
                     <div className="flex-1 w-full flex items-center justify-center px-6 md:px-20">
                         <div className="border-2 border-black dark:border-white p-8 md:p-10 w-full max-w-xl flex flex-col items-center gap-6 text-center dark:text-white">
                             <SmileySadIcon className="h-16 w-auto" weight="bold"></SmileySadIcon>
@@ -267,9 +256,7 @@ export default function MockExamPage() {
                             </button>
                         </div>
                     </div>
-                    <Footer></Footer>
-                </div>
-            </>
+            </Layout>
         );
     }
 
@@ -308,9 +295,7 @@ export default function MockExamPage() {
     });
 
     return (
-        <>
-            <div className="py-10 md:py-0 md:min-h-screen flex md:w-full flex-col items-center bg-white dark:bg-zinc-950 dark:text-white gap-4 md:gap-10 select-none">
-                <NavBar></NavBar>
+        <Layout className="py-10 md:py-0 md:min-h-screen md:w-full dark:text-white gap-4 md:gap-10 select-none">
 
                 <div className="w-[79vw] md:w-full flex justify-between md:px-10 items-center">
                     <button
@@ -560,8 +545,6 @@ export default function MockExamPage() {
                     </div>
                 </div>
 
-                <Footer></Footer>
-            </div>
-        </>
+        </Layout>
     );
 }

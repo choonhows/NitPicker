@@ -5,9 +5,9 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
-import NavBar from "../components/navbar";
-import Footer from "../components/footer";
+import Layout from "../components/Layout";
 import { categoryTopics, type CategoryName } from "../exam/mockExamModel";
+import { normalizeLegacySymbols, normalizeMathDelimiters } from "../lib/textFormat";
 import "katex/dist/katex.min.css";
 
 type PreviousExamQuestion = {
@@ -23,16 +23,6 @@ type PreviousExamQuestion = {
   correctOptionText: string | null;
   answerExplanation: string | null;
 };
-
-const normalizeLegacySymbols = (text: string): string =>
-  text
-    .replace(/\uF0AE|\uF0E0/g, "→")
-    .replace(/\uF0DF/g, "←")
-    .replace(/\uF0A3/g, "≤")
-    .replace(/\uF0B3/g, "≥")
-    .replace(/\uF0B8/g, "÷")
-    .replace(/\uF0B4/g, "×")
-    .replace(/\uF0B9/g, "≠");
 
 const stripInlineMarkdown = (text: string): string =>
   text
@@ -211,11 +201,6 @@ const mapTagsToTopic = (tags: string[], fallbackText: string): string => {
 
   return inferTopicFromText(fallbackText);
 };
-
-const normalizeMathDelimiters = (text: string): string =>
-  text
-    .replace(/\\\((.+?)\\\)/gs, (_, expression: string) => `$${expression}$`)
-    .replace(/\\\[(.+?)\\\]/gs, (_, expression: string) => `$$${expression}$$`);
 
 const parseOptionPrefix = (
   line: string,
@@ -469,9 +454,7 @@ export default function PreviousExamsPage() {
   };
 
   return (
-    <>
-      <div className="min-h-screen flex w-full flex-col items-center bg-white dark:bg-zinc-950 dark:text-white gap-8 md:gap-10 select-none py-8 md:py-0">
-        <NavBar></NavBar>
+    <Layout className="dark:text-white gap-8 md:gap-10 select-none py-8 md:py-0">
 
         <main className="w-full px-4 md:px-10 lg:px-20 xl:px-28 pb-8 md:pb-12">
           <div className="p-4 md:p-6 lg:p-8">
@@ -697,8 +680,6 @@ export default function PreviousExamsPage() {
           </div>
         </main>
 
-        <Footer></Footer>
-      </div>
-    </>
+    </Layout>
   );
 }

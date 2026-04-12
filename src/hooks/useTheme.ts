@@ -18,15 +18,6 @@ export function useTheme() {
     window.dispatchEvent(new CustomEvent(THEME_EVENT, { detail: { isDark } }))
   }, [isDark])
 
-  // Apply stored preference on first mount before React paint
-  useEffect(() => {
-    const stored = localStorage.getItem('theme')
-    if (stored === 'dark') {
-      document.documentElement.classList.add('dark')
-      setIsDark(true)
-    }
-  }, [])
-
   useEffect(() => {
     const handleThemeChange = (event: Event) => {
       const nextIsDark = (event as CustomEvent<{ isDark?: boolean }>).detail?.isDark
@@ -38,7 +29,6 @@ export function useTheme() {
     window.addEventListener(THEME_EVENT, handleThemeChange)
     return () => window.removeEventListener(THEME_EVENT, handleThemeChange)
   }, [])
-
   const toggle = () => setIsDark((prev) => !prev)
 
   return { isDark, toggle }
