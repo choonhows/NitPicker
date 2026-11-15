@@ -9,18 +9,7 @@ import Layout from "../components/Layout";
 import { MOCK_EXAM_IMAGE_BASE_PATH } from "../config/constants";
 import { normalizeLegacySymbols, normalizeMathDelimiters } from "../lib/textFormat";
 import { trackEvent } from "../lib/analytics";
-import {
-  ArrowClockwiseIcon,
-  ArrowsOutIcon,
-  ArrowSquareOutIcon,
-  BookmarkSimpleIcon,
-  CaretDownIcon,
-  CheckCircleIcon,
-  LightbulbIcon,
-  MagnifyingGlassIcon,
-  XCircleIcon,
-  XIcon,
-} from "@phosphor-icons/react";
+import { RotateCw as ArrowClockwiseIcon, Maximize2 as ArrowsOutIcon, ExternalLink as ArrowSquareOutIcon, Bookmark as BookmarkSimpleIcon, ChevronDown as CaretDownIcon, CircleCheck as CheckCircleIcon, Lightbulb as LightbulbIcon, Search as MagnifyingGlassIcon, CircleX as XCircleIcon, X as XIcon } from "lucide-react";
 import {
   bookmarkMultipleQuestions,
   formatClockFromSeconds,
@@ -152,7 +141,7 @@ const WrongQuestionReviewItem = React.memo(function WrongQuestionReviewItem({
               }`}
               title={isBookmarked ? "Starred in Weak Spots" : "Star question"}
             >
-              <BookmarkSimpleIcon className="h-3 w-3" weight={isBookmarked ? "fill" : "bold"} />
+              <BookmarkSimpleIcon className="h-3 w-3" />
               <span>{isBookmarked ? "STARRED" : "STAR"}</span>
             </span>
           </div>
@@ -168,14 +157,14 @@ const WrongQuestionReviewItem = React.memo(function WrongQuestionReviewItem({
             className={`h-5 w-5 opacity-70 transition-transform duration-200 ${
               isOpen ? "rotate-180" : "rotate-0"
             }`}
-            weight="bold"
+            strokeWidth={2.5}
           />
         </div>
       </button>
 
       {/* Expanded Question Review Panel */}
       {isOpen ? (
-        <div className="border-t-2 border-zinc-950/15 dark:border-zinc-200/15 overflow-hidden">
+        <div className="border-t-2 border-zinc-950/15 dark:border-zinc-600/15 overflow-hidden">
           <div className="p-4 sm:p-6 flex flex-col gap-5 bg-zinc-50/50 dark:bg-zinc-900/50">
             {/* Full Question Text */}
             <div className="text-sm md:text-base leading-relaxed prose prose-zinc dark:prose-invert max-w-none prose-p:my-1">
@@ -184,7 +173,7 @@ const WrongQuestionReviewItem = React.memo(function WrongQuestionReviewItem({
 
             {/* Question Markdown Table */}
             {wrongQuestion.tableText ? (
-              <div className="question-table-wrap border-2 border-zinc-950/20 dark:border-zinc-200/20 bg-white dark:bg-zinc-900 p-3 sm:p-4">
+              <div className="question-table-wrap border-2 border-zinc-950/20 dark:border-zinc-600/20 bg-white dark:bg-zinc-900 p-3 sm:p-4">
                 <div className="text-xs sm:text-sm">
                   <ReactMarkdown remarkPlugins={REMARK_GFM_PLUGINS}>
                     {wrongQuestion.tableText}
@@ -200,7 +189,7 @@ const WrongQuestionReviewItem = React.memo(function WrongQuestionReviewItem({
                   Question Diagram
                 </span>
                 <div
-                  className="group relative border-2 border-zinc-950/20 dark:border-zinc-200/20 bg-white dark:bg-zinc-900 p-3 flex flex-col items-center cursor-zoom-in self-start"
+                  className="group relative border-2 border-zinc-950/20 dark:border-zinc-600/20 bg-white dark:bg-zinc-900 p-3 flex flex-col items-center cursor-zoom-in self-start"
                   onClick={() => onZoomImage(resolvedImgUrl)}
                   role="button"
                   tabIndex={0}
@@ -220,7 +209,7 @@ const WrongQuestionReviewItem = React.memo(function WrongQuestionReviewItem({
                     }}
                   />
                   <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 px-2 py-1 text-xs font-mono font-bold flex items-center gap-1 shadow-md">
-                    <ArrowsOutIcon className="h-3.5 w-3.5" weight="bold" />
+                    <ArrowsOutIcon className="h-3.5 w-3.5" strokeWidth={2.5} />
                     <span>ZOOM</span>
                   </div>
                 </div>
@@ -232,7 +221,7 @@ const WrongQuestionReviewItem = React.memo(function WrongQuestionReviewItem({
               {/* Your Selection */}
               <div className="border-2 border-red-500 bg-red-50/80 dark:bg-red-950/30 p-3.5 sm:p-4 flex flex-col gap-2">
                 <div className="flex items-center gap-2 text-red-900 dark:text-red-300 font-mono text-xs font-bold uppercase tracking-wide">
-                  <XCircleIcon className="h-4 w-4 shrink-0" weight="fill" />
+                  <XCircleIcon className="h-4 w-4 shrink-0" />
                   <span>YOUR ANSWER</span>
                 </div>
                 <div className="text-sm md:text-base font-mono text-red-950 dark:text-red-100 prose prose-zinc dark:prose-invert max-w-none prose-p:my-0">
@@ -245,14 +234,14 @@ const WrongQuestionReviewItem = React.memo(function WrongQuestionReviewItem({
                         normalizeLegacySymbols(
                           `**Option ${wrongQuestion.selectedOption}**${
                             wrongQuestion.selectedOptionText
-                              ? ` — ${wrongQuestion.selectedOptionText}`
+                              ? `: ${wrongQuestion.selectedOptionText}`
                               : ""
                           }`,
                         ),
                       )}
                     </ReactMarkdown>
                   ) : (
-                    <span className="italic opacity-70">
+                    <span className="opacity-70">
                       No answer selected (Question skipped)
                     </span>
                   )}
@@ -262,7 +251,7 @@ const WrongQuestionReviewItem = React.memo(function WrongQuestionReviewItem({
               {/* Correct Answer */}
               <div className="border-2 border-emerald-500 bg-emerald-50/80 dark:bg-emerald-950/30 p-3.5 sm:p-4 flex flex-col gap-2">
                 <div className="flex items-center gap-2 text-emerald-900 dark:text-emerald-300 font-mono text-xs font-bold uppercase tracking-wide">
-                  <CheckCircleIcon className="h-4 w-4 shrink-0" weight="fill" />
+                  <CheckCircleIcon className="h-4 w-4 shrink-0" />
                   <span>CORRECT ANSWER</span>
                 </div>
                 <div className="text-sm md:text-base font-mono text-emerald-950 dark:text-emerald-100 prose prose-zinc dark:prose-invert max-w-none prose-p:my-0">
@@ -274,7 +263,7 @@ const WrongQuestionReviewItem = React.memo(function WrongQuestionReviewItem({
                       normalizeLegacySymbols(
                         `**Option ${wrongQuestion.correctOption}**${
                           wrongQuestion.correctOptionText
-                            ? ` — ${wrongQuestion.correctOptionText}`
+                            ? `: ${wrongQuestion.correctOptionText}`
                             : ""
                         }`,
                       ),
@@ -285,9 +274,9 @@ const WrongQuestionReviewItem = React.memo(function WrongQuestionReviewItem({
             </div>
 
             {/* Step-by-Step Explanation Card */}
-            <div className="border-2 border-zinc-950/20 dark:border-zinc-200/20 bg-white dark:bg-zinc-900 p-4 sm:p-5 flex flex-col gap-2">
+            <div className="border-2 border-zinc-950/20 dark:border-zinc-600/20 bg-white dark:bg-zinc-900 p-4 sm:p-5 flex flex-col gap-2">
               <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wide text-zinc-600 dark:text-zinc-400">
-                <LightbulbIcon className="h-4 w-4" weight="bold" />
+                <LightbulbIcon className="h-4 w-4" strokeWidth={2.5} />
                 <span>Step-by-Step Solution & Explanation</span>
               </div>
               <div className="text-sm md:text-base leading-relaxed prose prose-zinc dark:prose-invert max-w-none prose-p:my-1">
@@ -301,7 +290,7 @@ const WrongQuestionReviewItem = React.memo(function WrongQuestionReviewItem({
                     )}
                   </ReactMarkdown>
                 ) : (
-                  <p className="opacity-60 italic text-xs font-mono">
+                  <p className="opacity-60 text-xs font-mono">
                     No detailed markdown explanation available in the source archive for this question item.
                   </p>
                 )}
@@ -358,7 +347,7 @@ function BackToTopButton() {
           : "opacity-0 translate-y-2 pointer-events-none"
       }`}
     >
-      <p className="text-xs font-mono font-bold px-2 py-0.5 border border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-100 shadow-[2px_2px_0px_0px_rgba(9,9,11,1)] dark:shadow-[2px_2px_0px_0px_rgba(244,244,245,1)]">
+      <p className="text-xs font-mono font-bold px-2 py-0.5 border border-zinc-950 dark:border-zinc-600 bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-100 shadow-[2px_2px_0px_0px_rgba(9,9,11,1)] dark:shadow-[2px_2px_0px_0px_rgba(244,244,245,1)]">
         {scrollProgress}%
       </p>
       <button
@@ -575,7 +564,7 @@ export default function MockExamResultsPage() {
       <Layout className="py-6 sm:py-10 px-4 sm:px-6 md:px-10 lg:px-16 dark:text-zinc-100 flex flex-col gap-8 md:gap-10">
         <div className="w-full max-w-7xl mx-auto flex flex-col gap-8">
           {/* Header Title */}
-          <div className="flex flex-col gap-1 border-b-2 border-zinc-950 dark:border-zinc-100 pb-4">
+          <div className="flex flex-col gap-1 border-b-2 border-zinc-950 dark:border-zinc-600 pb-4">
             <div className="flex items-center justify-between flex-wrap gap-2">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-mono">
                 EXAM RESULTS & ANALYTICS
@@ -741,7 +730,7 @@ export default function MockExamResultsPage() {
                   onClick={handleRetakeExam}
                   className="btn-solid py-3 px-4 text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2"
                 >
-                  <ArrowClockwiseIcon className="h-4 w-4" weight="bold" />
+                  <ArrowClockwiseIcon className="h-4 w-4" strokeWidth={2.5} />
                   <span>RETAKE EXAM</span>
                 </button>
 
@@ -758,7 +747,7 @@ export default function MockExamResultsPage() {
                   onClick={() => navigate("/previousexams")}
                   className="btn-outline py-3 px-4 text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2"
                 >
-                  <ArrowSquareOutIcon className="h-4 w-4" weight="bold" />
+                  <ArrowSquareOutIcon className="h-4 w-4" strokeWidth={2.5} />
                   <span>BROWSE ARCHIVE</span>
                 </button>
               </div>
@@ -767,7 +756,7 @@ export default function MockExamResultsPage() {
 
           {/* Section 2: Domain & Topic Mastery Breakdown */}
           <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between border-b-2 border-zinc-950 dark:border-zinc-100 pb-2">
+            <div className="flex items-center justify-between border-b-2 border-zinc-950 dark:border-zinc-600 pb-2">
               <h2 className="text-xl sm:text-2xl font-bold font-mono uppercase tracking-wide">
                 Domain & Topic Mastery Breakdown
               </h2>
@@ -811,13 +800,13 @@ export default function MockExamResultsPage() {
                         </span>
                         <CaretDownIcon
                           className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : "rotate-0"}`}
-                          weight="bold"
+                          strokeWidth={2.5}
                         />
                       </div>
                     </button>
 
                     {/* Horizontal Progress Bar */}
-                    <div className="w-full h-3 bg-zinc-200 dark:bg-zinc-800 border border-zinc-950/25 dark:border-zinc-200/25">
+                    <div className="w-full h-3 bg-zinc-200 dark:bg-zinc-800 border border-zinc-950/25 dark:border-zinc-600/25">
                       <div
                         style={{ width: `${catPct}%` }}
                         className={`h-full transition-[width] duration-500 ${
@@ -883,7 +872,7 @@ export default function MockExamResultsPage() {
 
           {/* Section 3: Filterable Wrong-Answer Review */}
           <div className="flex flex-col gap-4 pt-2">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b-2 border-zinc-950 dark:border-zinc-100 pb-3">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b-2 border-zinc-950 dark:border-zinc-600 pb-3">
               <div className="flex items-center gap-3">
                 <h2 className="text-xl sm:text-2xl font-bold font-mono uppercase tracking-wide">
                   Incorrect Questions Review
@@ -901,7 +890,7 @@ export default function MockExamResultsPage() {
                     disabled={allMissedSaved}
                     className="btn-solid py-1 px-3 text-xs font-mono uppercase tracking-wider flex items-center gap-1.5 bg-amber-400 text-zinc-950 border-zinc-950 hover:bg-amber-300 disabled:opacity-50"
                   >
-                    <BookmarkSimpleIcon className="h-3.5 w-3.5" weight="fill" />
+                    <BookmarkSimpleIcon className="h-3.5 w-3.5" fill="currentColor" />
                     <span>{allMissedSaved ? "SAVED TO WEAK SPOTS!" : `STAR ALL MISSED (${wrongQuestions.length})`}</span>
                   </button>
                 )}
@@ -984,9 +973,9 @@ export default function MockExamResultsPage() {
             {/* Questions List */}
             {wrongQuestions.length === 0 ? (
               <div className="card-brut p-8 sm:p-10 flex flex-col items-center justify-center text-center gap-3 bg-emerald-50 dark:bg-emerald-950/20 border-emerald-600 dark:border-emerald-500">
-                <CheckCircleIcon className="h-12 w-12 text-emerald-600 dark:text-emerald-400" weight="fill" />
+                <CheckCircleIcon className="h-12 w-12 text-emerald-600 dark:text-emerald-400" />
                 <h3 className="text-xl font-bold font-mono uppercase text-emerald-900 dark:text-emerald-100">
-                  PERFECT SCORE — 100% ACCURACY!
+                  PERFECT SCORE: 100% ACCURACY
                 </h3>
                 <p className="text-xs sm:text-sm font-mono opacity-80 max-w-md">
                   You answered all questions correctly in this exam session. Excellent work!
@@ -1035,7 +1024,7 @@ export default function MockExamResultsPage() {
           aria-modal="true"
         >
           <div
-            className="relative max-w-4xl w-full max-h-[90vh] bg-white dark:bg-zinc-900 border-2 border-zinc-950 dark:border-zinc-100 p-4 flex flex-col items-center"
+            className="relative max-w-4xl w-full max-h-[90vh] bg-white dark:bg-zinc-900 border-2 border-zinc-950 dark:border-zinc-600 p-4 flex flex-col items-center"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="w-full flex justify-between items-center mb-3 pb-2 border-b border-zinc-200 dark:border-zinc-800">
@@ -1048,7 +1037,7 @@ export default function MockExamResultsPage() {
                 className="p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 font-bold cursor-pointer"
                 aria-label="Close diagram preview"
               >
-                <XIcon className="h-5 w-5" weight="bold" />
+                <XIcon className="h-5 w-5" strokeWidth={2.5} />
               </button>
             </div>
             <div className="overflow-auto max-h-[75vh] w-full flex items-center justify-center p-2">

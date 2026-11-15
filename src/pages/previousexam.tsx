@@ -9,7 +9,6 @@ import {
   ChevronsUpDown,
   ChevronsDownUp,
   RotateCcw,
-  BookOpen,
   Bookmark,
 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -96,7 +95,7 @@ const QuestionAccordionItem = React.memo(function QuestionAccordionItem({
   ), [question.questionText]);
 
   return (
-    <article className="border-2 border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-900 transition shadow-xs">
+    <article className="border-2 border-zinc-950 dark:border-zinc-600 bg-white dark:bg-zinc-900 transition shadow-xs">
       {/* Question Accordion Header */}
       <div className="flex items-start">
       <button
@@ -109,7 +108,7 @@ const QuestionAccordionItem = React.memo(function QuestionAccordionItem({
         <div className="space-y-2 flex-1">
           {/* Badge Metadata Bar */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="badge-brut bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 border-zinc-950 dark:border-zinc-100">
+            <span className="badge-brut bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 border-zinc-950 dark:border-zinc-600">
               Q{question.questionNumber}
             </span>
             <span className="badge-brut bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
@@ -167,7 +166,7 @@ const QuestionAccordionItem = React.memo(function QuestionAccordionItem({
           <div className="p-4 md:p-6 space-y-5 bg-white dark:bg-zinc-900">
             {/* Markdown Table if present */}
             {question.tableText ? (
-              <div className="question-table-wrap border-2 border-zinc-950 dark:border-zinc-300 p-3 bg-zinc-50 dark:bg-zinc-800/40">
+              <div className="question-table-wrap border-2 border-zinc-950 dark:border-zinc-600 p-3 bg-zinc-50 dark:bg-zinc-800/40">
                 <div className="text-xs md:text-sm">
                   <ReactMarkdown remarkPlugins={REMARK_GFM_PLUGINS}>
                     {question.tableText}
@@ -178,7 +177,7 @@ const QuestionAccordionItem = React.memo(function QuestionAccordionItem({
 
             {/* Diagram Image if present */}
             {resolvedImageUrl ? (
-              <div className="question-image-container border-2 border-zinc-950 dark:border-zinc-300 p-2 bg-zinc-50 dark:bg-zinc-800/40">
+              <div className="question-image-container border-2 border-zinc-950 dark:border-zinc-600 p-2 bg-zinc-50 dark:bg-zinc-800/40">
                 <img
                   src={resolvedImageUrl}
                   alt={`Diagram for question ${question.questionNumber}`}
@@ -297,7 +296,7 @@ const QuestionAccordionItem = React.memo(function QuestionAccordionItem({
             ) : null}
 
             {/* Official Explanation Box */}
-            <div className="border-l-4 border-blue-600 dark:border-blue-400 bg-blue-50/50 dark:bg-blue-950/20 p-4 space-y-2">
+            <div className="border border-zinc-200 dark:border-zinc-800 bg-blue-50/50 dark:bg-blue-950/20 p-4 space-y-2">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-900 dark:text-blue-300">
                   Official Walkthrough & Explanation
@@ -315,7 +314,7 @@ const QuestionAccordionItem = React.memo(function QuestionAccordionItem({
                     )}
                   </ReactMarkdown>
                 ) : (
-                  <p className="text-xs font-mono text-zinc-500 italic">
+                  <p className="text-xs font-mono text-zinc-500">
                     No additional written explanation is recorded in the vault for this question. Refer to choice {question.correctOption} for the verified answer.
                   </p>
                 )}
@@ -490,12 +489,9 @@ export default function PreviousExamsPage() {
     <Layout className="dark:text-white select-none py-6 md:py-8">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Header Section */}
-        <div className="border-b-2 border-zinc-950 dark:border-zinc-100 pb-6">
+        <div className="border-b-2 border-zinc-950 dark:border-zinc-600 pb-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 mb-2 bg-blue-100 dark:bg-blue-950/60 border border-blue-600 dark:border-blue-400 text-blue-900 dark:text-blue-200 text-xs font-mono font-bold uppercase tracking-wider">
-                <BookOpen className="w-3.5 h-3.5" /> PhilNITS Historical Archive
-              </div>
               <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight font-heading">
                 Previous Exam Vault
               </h1>
@@ -537,7 +533,7 @@ export default function PreviousExamsPage() {
         </div>
 
         {/* Sticky Search & Filter Bar */}
-        <div className="sticky top-16 z-30 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md py-4 border-b-2 border-zinc-950 dark:border-zinc-100 shadow-sm space-y-3">
+        <div className="sticky top-16 z-30 bg-white dark:bg-zinc-950 py-4 border-b-2 border-zinc-950 dark:border-zinc-600 shadow-sm space-y-3">
           {/* Top Row: Search Input + Expand/Collapse Button */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <div className="relative flex-1">
@@ -610,7 +606,7 @@ export default function PreviousExamsPage() {
                     onClick={() => setSelectedCategory(category)}
                     className={`px-2.5 py-1 font-mono font-semibold border transition cursor-pointer ${
                       isActive
-                        ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950 shadow-xs"
+                        ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-600 dark:bg-zinc-100 dark:text-zinc-950 shadow-xs"
                         : "border-zinc-300 dark:border-zinc-700 hover:border-zinc-950 text-zinc-600 dark:text-zinc-400 bg-white dark:bg-zinc-900"
                     }`}
                   >
@@ -634,7 +630,7 @@ export default function PreviousExamsPage() {
                     onClick={() => setSelectedExamType(examType)}
                     className={`px-2.5 py-1 font-mono font-semibold border transition cursor-pointer ${
                       isActive
-                        ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950 shadow-xs"
+                        ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-600 dark:bg-zinc-100 dark:text-zinc-950 shadow-xs"
                         : "border-zinc-300 dark:border-zinc-700 hover:border-zinc-950 text-zinc-600 dark:text-zinc-400 bg-white dark:bg-zinc-900"
                     }`}
                   >
@@ -678,7 +674,7 @@ export default function PreviousExamsPage() {
         {/* Empty Search State */}
         {filteredGroupedQuestions.length === 0 ? (
           <div className="card-brut p-10 text-center space-y-4 my-8">
-            <div className="w-12 h-12 mx-auto border-2 border-zinc-950 dark:border-zinc-100 flex items-center justify-center bg-zinc-100 dark:bg-zinc-800">
+            <div className="w-12 h-12 mx-auto border-2 border-zinc-950 dark:border-zinc-600 flex items-center justify-center bg-zinc-100 dark:bg-zinc-800">
               <Search className="w-6 h-6 text-zinc-500" />
             </div>
             <h3 className="text-xl font-bold font-heading">No Matching Questions Found</h3>
@@ -748,7 +744,7 @@ export default function PreviousExamsPage() {
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.25, ease: "easeInOut" }}
-                      className="border-t-2 border-zinc-950 dark:border-zinc-100 overflow-hidden"
+                      className="border-t-2 border-zinc-950 dark:border-zinc-600 overflow-hidden"
                     >
                       <div className="p-4 md:p-6 space-y-4 bg-zinc-50/50 dark:bg-zinc-950/40">
                         {displayedQuestions.map((question: PreviousExamQuestion) => (
@@ -764,7 +760,7 @@ export default function PreviousExamsPage() {
                         ))}
 
                         {hasMore ? (
-                          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t-2 border-zinc-950 dark:border-zinc-200">
+                          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t-2 border-zinc-950 dark:border-zinc-600">
                             <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
                               Showing <strong>{displayedQuestions.length}</strong> of <strong>{entry.questions.length}</strong> questions in {entry.year}
                             </span>
@@ -816,10 +812,10 @@ export default function PreviousExamsPage() {
           aria-label="Diagram preview"
         >
           <div
-            className="relative max-w-4xl w-full max-h-[90vh] bg-white dark:bg-zinc-900 border-2 border-zinc-950 dark:border-zinc-100 p-4 flex flex-col items-center shadow-2xl"
+            className="relative max-w-4xl w-full max-h-[90vh] bg-white dark:bg-zinc-900 border-2 border-zinc-950 dark:border-zinc-600 p-4 flex flex-col items-center shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="w-full flex items-center justify-between pb-3 border-b-2 border-zinc-950 dark:border-zinc-100 mb-3">
+            <div className="w-full flex items-center justify-between pb-3 border-b-2 border-zinc-950 dark:border-zinc-600 mb-3">
               <span className="text-xs font-mono font-bold uppercase tracking-wider opacity-70">
                 Diagram Preview (Press Esc or Click Outside)
               </span>

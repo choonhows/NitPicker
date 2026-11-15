@@ -1,6 +1,6 @@
 import Layout from '../components/Layout'
 import FeaturedNoteCard, { type FeaturedNote } from '../components/FeaturedNoteCard'
-import { BookOpenText, EnvelopeSimple, ChatCircleDots } from '@phosphor-icons/react'
+import { Mail as EnvelopeSimple, MessageCircleMore as ChatCircleDots } from "lucide-react";
 
 const featuredNotes: FeaturedNote[] = [
   {
@@ -44,17 +44,7 @@ export default function NotesPage() {
     <Layout>
       <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         {/* Editorial Page Header */}
-        <div className="mb-10 pb-6 border-b-2 border-zinc-950 dark:border-zinc-200">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="badge-brut bg-blue-600 text-white dark:bg-blue-500 dark:text-zinc-950">
-              <BookOpenText className="h-3 w-3" />
-              COMMUNITY VAULT
-            </span>
-            <span className="font-mono text-xs text-zinc-500 dark:text-zinc-400 font-bold uppercase tracking-wider">
-              PHILNITS FE NOTES & DECKS
-            </span>
-          </div>
-
+        <div className="mb-10 pb-6 border-b-2 border-zinc-950 dark:border-zinc-600">
           <h1 className="text-3xl sm:text-5xl font-heading font-black tracking-tight text-zinc-950 dark:text-zinc-100 uppercase">
             Featured Study Notes
           </h1>
@@ -67,7 +57,7 @@ export default function NotesPage() {
         {/* Contribution Callout Banner */}
         <section className="mb-10 p-5 sm:p-6 card-brut bg-zinc-50 dark:bg-zinc-900/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
           <div className="flex items-start gap-3">
-            <div className="p-2 border border-zinc-950 dark:border-zinc-200 bg-amber-200 dark:bg-amber-400 text-zinc-950 shrink-0">
+            <div className="p-2 border border-zinc-950 dark:border-zinc-600 bg-amber-200 dark:bg-amber-400 text-zinc-950 shrink-0">
               <ChatCircleDots className="h-5 w-5" />
             </div>
             <div>
@@ -101,7 +91,7 @@ export default function NotesPage() {
                 href={gmailComposeLink(email)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-2 py-0.5 border border-zinc-950 dark:border-zinc-300 font-mono text-xs font-semibold bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-950 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-950 shadow-[1px_1px_0px_0px_#09090b] dark:shadow-[1px_1px_0px_0px_#f4f4f5] transition"
+                className="inline-flex items-center px-2 py-0.5 border border-zinc-950 dark:border-zinc-600 font-mono text-xs font-semibold bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-950 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-950 shadow-[var(--shadow-brut-2xs)] transition"
               >
                 {email}
               </a>

@@ -39,7 +39,7 @@ export class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-100 font-sans">
-          <div className="w-full max-w-xl card-brut p-6 sm:p-8 bg-white dark:bg-zinc-900 flex flex-col gap-6 shadow-[5px_5px_0px_0px_#09090b] dark:shadow-[5px_5px_0px_0px_#f4f4f5]">
+          <div className="w-full max-w-xl card-brut p-6 sm:p-8 bg-white dark:bg-zinc-900 flex flex-col gap-6 shadow-[var(--shadow-brut-md)]">
             {/* Error Badge & Header */}
             <div>
               <div className="flex items-center gap-2 mb-3">
@@ -60,7 +60,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
             {/* Dev Mode Stack Dump */}
             {import.meta.env.DEV && this.state.error && (
-              <div className="border-2 border-zinc-950 dark:border-zinc-300 bg-zinc-100 dark:bg-zinc-950 p-4 font-mono text-xs overflow-x-auto max-h-48 text-rose-700 dark:text-rose-400">
+              <div className="border-2 border-zinc-950 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-950 p-4 font-mono text-xs overflow-x-auto max-h-48 text-rose-700 dark:text-rose-400">
                 <p className="font-bold mb-1">Developer Error Details:</p>
                 <pre className="whitespace-pre-wrap">{this.state.error.toString()}</pre>
               </div>
