@@ -145,7 +145,7 @@ export default function HomePage() {
             <div className="flex flex-col gap-5">
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="border-2 border-zinc-950 dark:border-zinc-200 p-4 flex flex-col justify-between gap-3 bg-zinc-50 dark:bg-zinc-800/50">
+                <div className="border-2 border-zinc-950 dark:border-zinc-600 p-4 flex flex-col justify-between gap-3 bg-zinc-50 dark:bg-zinc-800/50">
                   <div>
                     <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
                       STANDARD BENCHMARK
@@ -167,7 +167,7 @@ export default function HomePage() {
                   </button>
                 </div>
 
-                <div className="border-2 border-zinc-950 dark:border-zinc-200 p-4 flex flex-col justify-between gap-3 bg-zinc-50 dark:bg-zinc-800/50">
+                <div className="border-2 border-zinc-950 dark:border-zinc-600 p-4 flex flex-col justify-between gap-3 bg-zinc-50 dark:bg-zinc-800/50">
                   <div>
                     <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
                       SPEED PRACTICE
@@ -199,7 +199,7 @@ export default function HomePage() {
             
             {/* Study Progress & History Card */}
             <div className="card-brut p-5 sm:p-6 flex flex-col gap-4">
-              <div className="flex items-center justify-between border-b-2 border-zinc-950 dark:border-zinc-200 pb-3">
+              <div className="flex items-center justify-between border-b-2 border-zinc-950 dark:border-zinc-600 pb-3">
                 <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-zinc-950 dark:text-zinc-100">
                   <ChartLineUp className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                   STUDY PERFORMANCE
@@ -212,7 +212,7 @@ export default function HomePage() {
               {latestAttempt ? (
                 <div className="flex flex-col gap-4">
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="border border-zinc-950 dark:border-zinc-300 p-3 bg-zinc-50 dark:bg-zinc-800/60">
+                    <div className="border border-zinc-950 dark:border-zinc-600 p-3 bg-zinc-50 dark:bg-zinc-800/60">
                       <span className="text-[10px] font-mono uppercase text-zinc-500">LATEST SCORE</span>
                       <p className={`font-mono text-2xl font-bold ${latestAttempt.passed ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'}`}>
                         {latestAttempt.percentage.toFixed(1)}%
@@ -222,7 +222,7 @@ export default function HomePage() {
                       </span>
                     </div>
 
-                    <div className="border border-zinc-950 dark:border-zinc-300 p-3 bg-zinc-50 dark:bg-zinc-800/60">
+                    <div className="border border-zinc-950 dark:border-zinc-600 p-3 bg-zinc-50 dark:bg-zinc-800/60">
                       <span className="text-[10px] font-mono uppercase text-zinc-500">HIGHEST SCORE</span>
                       <p className="font-mono text-2xl font-bold text-zinc-950 dark:text-zinc-100">
                         {highestScore.toFixed(1)}%
@@ -268,7 +268,7 @@ export default function HomePage() {
 
             {/* Starred Weak Spots Deck Card */}
             <div className="card-brut p-5 sm:p-6 flex flex-col gap-3">
-              <div className="flex items-center justify-between border-b-2 border-zinc-950 dark:border-zinc-200 pb-3">
+              <div className="flex items-center justify-between border-b-2 border-zinc-950 dark:border-zinc-600 pb-3">
                 <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-zinc-950 dark:text-zinc-100">
                   <BookmarkSimple className="h-4 w-4 text-amber-500" fill="currentColor" />
                   STARRED WEAK SPOTS DECK
@@ -302,7 +302,7 @@ export default function HomePage() {
         </div>
 
         {/* Bottom Dual Portals: Archive & Notes */}
-        <div className="mt-12 pt-8 border-t-2 border-zinc-950 dark:border-zinc-200 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="mt-12 pt-8 border-t-2 border-zinc-950 dark:border-zinc-600 grid grid-cols-1 md:grid-cols-2 gap-6">
           <Link
             to="/previousexams"
             className="card-brut p-6 hover:shadow-[var(--shadow-brut-md)] transition cursor-pointer flex flex-col justify-between group"

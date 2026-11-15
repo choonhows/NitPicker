@@ -53,10 +53,10 @@ html.dark {
   --accent-bg: rgba(59, 130, 246, 0.15);
   --accent-border: rgba(59, 130, 246, 0.6);
   --social-bg: rgba(24, 24, 27, 0.85);
-  --shadow-brut-2xs: 1px 1px 0px 0px #f4f4f5;
-  --shadow-brut-xs: 2px 2px 0px 0px #f4f4f5;
-  --shadow-brut-sm: 3px 3px 0px 0px #f4f4f5;
-  --shadow-brut-md: 5px 5px 0px 0px #f4f4f5;
+  --shadow-brut-2xs: 1px 1px 0px 0px #52525b;
+  --shadow-brut-xs: 2px 2px 0px 0px #52525b;
+  --shadow-brut-sm: 3px 3px 0px 0px #52525b;
+  --shadow-brut-md: 5px 5px 0px 0px #52525b;
   --shadow:
     rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
 }

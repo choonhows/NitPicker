@@ -574,7 +574,7 @@ export default function MockExamPage() {
   return (
     <Layout className="p-0 min-h-screen dark:text-zinc-100 flex flex-col bg-zinc-50 dark:bg-zinc-950">
       {/* Top Edge Progress Bar */}
-      <div className="sticky top-0 z-40 bg-white dark:bg-zinc-950 border-b-2 border-zinc-950 dark:border-zinc-100">
+      <div className="sticky top-0 z-40 bg-white dark:bg-zinc-950 border-b-2 border-zinc-950 dark:border-zinc-600">
         <div className="w-full h-1.5 bg-zinc-200 dark:bg-zinc-800">
           <div
             style={{ width: `${totalQuestions > 0 ? (answeredCount / totalQuestions) * 100 : 0}%` }}
@@ -754,7 +754,7 @@ export default function MockExamPage() {
             <button
               type="button"
               onClick={() => setIsSubmitModalOpen(true)}
-              className="border-2 border-zinc-950 dark:border-zinc-100 bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 px-2.5 sm:px-3.5 py-1 text-xs font-mono font-bold uppercase tracking-wider hover:bg-red-600 dark:hover:bg-red-500 hover:text-white dark:hover:text-white hover:border-red-600 transition-colors cursor-pointer"
+              className="border-2 border-zinc-950 dark:border-zinc-600 bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 px-2.5 sm:px-3.5 py-1 text-xs font-mono font-bold uppercase tracking-wider hover:bg-red-600 dark:hover:bg-red-500 hover:text-white dark:hover:text-white hover:border-red-600 transition-colors cursor-pointer"
             >
               FINISH
             </button>
@@ -781,7 +781,7 @@ export default function MockExamPage() {
 
       {/* Question Navigator Drawer / Popover */}
       {isNavigatorOpen ? (
-        <div className="border-b-2 border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-900 p-4 sm:p-6 shadow-xl animate-in slide-in-from-top duration-200">
+        <div className="border-b-2 border-zinc-950 dark:border-zinc-600 bg-white dark:bg-zinc-900 p-4 sm:p-6 shadow-xl animate-in slide-in-from-top duration-200">
           <div className="max-w-5xl mx-auto flex flex-col gap-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4 flex-wrap">
@@ -826,7 +826,7 @@ export default function MockExamPage() {
                 } else if (isQFlagged) {
                   statusClass = "border-2 border-amber-500 bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-200 font-bold";
                 } else if (isAnswered) {
-                  statusClass = "border border-zinc-950 dark:border-zinc-200 bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 font-bold";
+                  statusClass = "border border-zinc-950 dark:border-zinc-600 bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 font-bold";
                 }
 
                 return (
@@ -886,7 +886,7 @@ export default function MockExamPage() {
 
           {/* Markdown Table if present */}
           {currentQuestion.tableText ? (
-            <div className="question-table-wrap border-2 border-zinc-950/20 dark:border-zinc-200/20 bg-zinc-50 dark:bg-zinc-900/50 p-3 sm:p-4 my-1">
+            <div className="question-table-wrap border-2 border-zinc-950/20 dark:border-zinc-600/20 bg-zinc-50 dark:bg-zinc-900/50 p-3 sm:p-4 my-1">
               <div className="text-xs sm:text-sm">
                 <ReactMarkdown remarkPlugins={gfmPlugins}>
                   {currentQuestion.tableText}
@@ -907,7 +907,7 @@ export default function MockExamPage() {
                 </span>
               </div>
               <div
-                className="group relative border-2 border-zinc-950/25 dark:border-zinc-200/25 bg-white dark:bg-zinc-900 p-3 flex flex-col items-center justify-center cursor-zoom-in transition hover:border-zinc-950 dark:hover:border-zinc-200"
+                className="group relative border-2 border-zinc-950/25 dark:border-zinc-600/25 bg-white dark:bg-zinc-900 p-3 flex flex-col items-center justify-center cursor-zoom-in transition hover:border-zinc-950 dark:hover:border-zinc-200"
                 onClick={() => setZoomedImageUrl(resolvedQuestionImageUrl)}
                 role="button"
                 tabIndex={0}
@@ -973,7 +973,7 @@ export default function MockExamPage() {
                   cardClasses += "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 opacity-50 cursor-default";
                 }
               } else if (isSelected) {
-                cardClasses += "border-zinc-950 dark:border-zinc-100 bg-zinc-100 dark:bg-zinc-800 shadow-[3px_3px_0px_0px_rgba(9,9,11,1)] dark:shadow-[3px_3px_0px_0px_rgba(244,244,245,1)] translate-x-[-1px] translate-y-[-1px] cursor-pointer";
+                cardClasses += "border-zinc-950 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-800 shadow-[3px_3px_0px_0px_rgba(9,9,11,1)] dark:shadow-[3px_3px_0px_0px_rgba(244,244,245,1)] translate-x-[-1px] translate-y-[-1px] cursor-pointer";
               } else {
                 cardClasses += "border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:border-zinc-950 dark:hover:border-zinc-200 hover:shadow-[2px_2px_0px_0px_rgba(9,9,11,0.5)] cursor-pointer";
               }
@@ -985,7 +985,7 @@ export default function MockExamPage() {
               } else if (instantRevealEnabled && isSelected && !isCorrectOption) {
                 badgeClasses += "border-red-600 bg-red-600 text-white";
               } else if (isSelected) {
-                badgeClasses += "border-zinc-950 dark:border-zinc-100 bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950";
+                badgeClasses += "border-zinc-950 dark:border-zinc-600 bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950";
               } else {
                 badgeClasses += "border-zinc-400 dark:border-zinc-600 bg-zinc-50 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200";
               }
@@ -1073,7 +1073,7 @@ export default function MockExamPage() {
                   </button>
 
                   {explanationVisible ? (
-                    <div className="border-2 border-zinc-950 dark:border-zinc-200 bg-zinc-50 dark:bg-zinc-900 p-4 sm:p-5 flex flex-col gap-2 animate-in fade-in duration-200">
+                    <div className="border-2 border-zinc-950 dark:border-zinc-600 bg-zinc-50 dark:bg-zinc-900 p-4 sm:p-5 flex flex-col gap-2 animate-in fade-in duration-200">
                       <p className="font-mono text-xs font-bold uppercase tracking-wider opacity-75">
                         Step-by-Step Solution
                       </p>
@@ -1161,7 +1161,7 @@ export default function MockExamPage() {
           aria-modal="true"
         >
           <div
-            className="relative max-w-4xl w-full max-h-[90vh] bg-white dark:bg-zinc-900 border-2 border-zinc-950 dark:border-zinc-100 p-4 flex flex-col items-center"
+            className="relative max-w-4xl w-full max-h-[90vh] bg-white dark:bg-zinc-900 border-2 border-zinc-950 dark:border-zinc-600 p-4 flex flex-col items-center"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="w-full flex justify-between items-center mb-3 pb-2 border-b border-zinc-200 dark:border-zinc-800">
@@ -1200,7 +1200,7 @@ export default function MockExamPage() {
             className="modal-panel flex flex-col gap-6"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between pb-3 border-b-2 border-zinc-950 dark:border-zinc-100">
+            <div className="flex items-center justify-between pb-3 border-b-2 border-zinc-950 dark:border-zinc-600">
               <h2 className="text-xl sm:text-2xl font-bold font-mono uppercase tracking-tight">
                 Submit Exam Confirmation
               </h2>
@@ -1296,7 +1296,7 @@ export default function MockExamPage() {
             className="modal-panel max-w-lg flex flex-col gap-5"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between pb-3 border-b-2 border-zinc-950 dark:border-zinc-100">
+            <div className="flex items-center justify-between pb-3 border-b-2 border-zinc-950 dark:border-zinc-600">
               <div className="flex items-center gap-2">
                 <QuestionIcon className="h-5 w-5 text-blue-600 dark:text-blue-400" strokeWidth={2.5} />
                 <h2 className="text-xl font-bold font-mono uppercase tracking-tight">

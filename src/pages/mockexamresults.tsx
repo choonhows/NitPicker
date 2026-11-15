@@ -164,7 +164,7 @@ const WrongQuestionReviewItem = React.memo(function WrongQuestionReviewItem({
 
       {/* Expanded Question Review Panel */}
       {isOpen ? (
-        <div className="border-t-2 border-zinc-950/15 dark:border-zinc-200/15 overflow-hidden">
+        <div className="border-t-2 border-zinc-950/15 dark:border-zinc-600/15 overflow-hidden">
           <div className="p-4 sm:p-6 flex flex-col gap-5 bg-zinc-50/50 dark:bg-zinc-900/50">
             {/* Full Question Text */}
             <div className="text-sm md:text-base leading-relaxed prose prose-zinc dark:prose-invert max-w-none prose-p:my-1">
@@ -173,7 +173,7 @@ const WrongQuestionReviewItem = React.memo(function WrongQuestionReviewItem({
 
             {/* Question Markdown Table */}
             {wrongQuestion.tableText ? (
-              <div className="question-table-wrap border-2 border-zinc-950/20 dark:border-zinc-200/20 bg-white dark:bg-zinc-900 p-3 sm:p-4">
+              <div className="question-table-wrap border-2 border-zinc-950/20 dark:border-zinc-600/20 bg-white dark:bg-zinc-900 p-3 sm:p-4">
                 <div className="text-xs sm:text-sm">
                   <ReactMarkdown remarkPlugins={REMARK_GFM_PLUGINS}>
                     {wrongQuestion.tableText}
@@ -189,7 +189,7 @@ const WrongQuestionReviewItem = React.memo(function WrongQuestionReviewItem({
                   Question Diagram
                 </span>
                 <div
-                  className="group relative border-2 border-zinc-950/20 dark:border-zinc-200/20 bg-white dark:bg-zinc-900 p-3 flex flex-col items-center cursor-zoom-in self-start"
+                  className="group relative border-2 border-zinc-950/20 dark:border-zinc-600/20 bg-white dark:bg-zinc-900 p-3 flex flex-col items-center cursor-zoom-in self-start"
                   onClick={() => onZoomImage(resolvedImgUrl)}
                   role="button"
                   tabIndex={0}
@@ -274,7 +274,7 @@ const WrongQuestionReviewItem = React.memo(function WrongQuestionReviewItem({
             </div>
 
             {/* Step-by-Step Explanation Card */}
-            <div className="border-2 border-zinc-950/20 dark:border-zinc-200/20 bg-white dark:bg-zinc-900 p-4 sm:p-5 flex flex-col gap-2">
+            <div className="border-2 border-zinc-950/20 dark:border-zinc-600/20 bg-white dark:bg-zinc-900 p-4 sm:p-5 flex flex-col gap-2">
               <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wide text-zinc-600 dark:text-zinc-400">
                 <LightbulbIcon className="h-4 w-4" strokeWidth={2.5} />
                 <span>Step-by-Step Solution & Explanation</span>
@@ -347,7 +347,7 @@ function BackToTopButton() {
           : "opacity-0 translate-y-2 pointer-events-none"
       }`}
     >
-      <p className="text-xs font-mono font-bold px-2 py-0.5 border border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-100 shadow-[2px_2px_0px_0px_rgba(9,9,11,1)] dark:shadow-[2px_2px_0px_0px_rgba(244,244,245,1)]">
+      <p className="text-xs font-mono font-bold px-2 py-0.5 border border-zinc-950 dark:border-zinc-600 bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-100 shadow-[2px_2px_0px_0px_rgba(9,9,11,1)] dark:shadow-[2px_2px_0px_0px_rgba(244,244,245,1)]">
         {scrollProgress}%
       </p>
       <button
@@ -564,7 +564,7 @@ export default function MockExamResultsPage() {
       <Layout className="py-6 sm:py-10 px-4 sm:px-6 md:px-10 lg:px-16 dark:text-zinc-100 flex flex-col gap-8 md:gap-10">
         <div className="w-full max-w-7xl mx-auto flex flex-col gap-8">
           {/* Header Title */}
-          <div className="flex flex-col gap-1 border-b-2 border-zinc-950 dark:border-zinc-100 pb-4">
+          <div className="flex flex-col gap-1 border-b-2 border-zinc-950 dark:border-zinc-600 pb-4">
             <div className="flex items-center justify-between flex-wrap gap-2">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-mono">
                 EXAM RESULTS & ANALYTICS
@@ -756,7 +756,7 @@ export default function MockExamResultsPage() {
 
           {/* Section 2: Domain & Topic Mastery Breakdown */}
           <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between border-b-2 border-zinc-950 dark:border-zinc-100 pb-2">
+            <div className="flex items-center justify-between border-b-2 border-zinc-950 dark:border-zinc-600 pb-2">
               <h2 className="text-xl sm:text-2xl font-bold font-mono uppercase tracking-wide">
                 Domain & Topic Mastery Breakdown
               </h2>
@@ -806,7 +806,7 @@ export default function MockExamResultsPage() {
                     </button>
 
                     {/* Horizontal Progress Bar */}
-                    <div className="w-full h-3 bg-zinc-200 dark:bg-zinc-800 border border-zinc-950/25 dark:border-zinc-200/25">
+                    <div className="w-full h-3 bg-zinc-200 dark:bg-zinc-800 border border-zinc-950/25 dark:border-zinc-600/25">
                       <div
                         style={{ width: `${catPct}%` }}
                         className={`h-full transition-[width] duration-500 ${
@@ -872,7 +872,7 @@ export default function MockExamResultsPage() {
 
           {/* Section 3: Filterable Wrong-Answer Review */}
           <div className="flex flex-col gap-4 pt-2">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b-2 border-zinc-950 dark:border-zinc-100 pb-3">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b-2 border-zinc-950 dark:border-zinc-600 pb-3">
               <div className="flex items-center gap-3">
                 <h2 className="text-xl sm:text-2xl font-bold font-mono uppercase tracking-wide">
                   Incorrect Questions Review
@@ -1024,7 +1024,7 @@ export default function MockExamResultsPage() {
           aria-modal="true"
         >
           <div
-            className="relative max-w-4xl w-full max-h-[90vh] bg-white dark:bg-zinc-900 border-2 border-zinc-950 dark:border-zinc-100 p-4 flex flex-col items-center"
+            className="relative max-w-4xl w-full max-h-[90vh] bg-white dark:bg-zinc-900 border-2 border-zinc-950 dark:border-zinc-600 p-4 flex flex-col items-center"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="w-full flex justify-between items-center mb-3 pb-2 border-b border-zinc-200 dark:border-zinc-800">

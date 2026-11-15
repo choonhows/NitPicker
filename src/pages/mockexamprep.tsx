@@ -302,7 +302,7 @@ export default function MockExamPrepPage() {
     <Layout className="dark:text-white select-none py-6 md:py-8">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Page Heading & Brutalist Banner */}
-        <div className="border-b-2 border-zinc-950 dark:border-zinc-100 pb-6">
+        <div className="border-b-2 border-zinc-950 dark:border-zinc-600 pb-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
               <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight font-heading">
@@ -534,7 +534,7 @@ export default function MockExamPrepPage() {
                     onClick={() => setExamType("AM EXAM")}
                     className={`py-2.5 px-4 text-sm font-bold border-2 transition cursor-pointer ${
                       examType === "AM EXAM"
-                        ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950 shadow-xs"
+                        ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-600 dark:bg-zinc-100 dark:text-zinc-950 shadow-xs"
                         : "border-zinc-300 dark:border-zinc-700 hover:border-zinc-950 dark:hover:border-zinc-300 bg-white dark:bg-zinc-900"
                     }`}
                   >
@@ -564,7 +564,7 @@ export default function MockExamPrepPage() {
                       onClick={() => setIsTimed(true)}
                       className={`py-2 px-3 text-xs md:text-sm font-bold border-2 transition cursor-pointer ${
                         isTimed
-                          ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950"
+                          ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-600 dark:bg-zinc-100 dark:text-zinc-950"
                           : "border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900"
                       }`}
                     >
@@ -575,7 +575,7 @@ export default function MockExamPrepPage() {
                       onClick={() => setIsTimed(false)}
                       className={`py-2 px-3 text-xs md:text-sm font-bold border-2 transition cursor-pointer ${
                         !isTimed
-                          ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950"
+                          ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-600 dark:bg-zinc-100 dark:text-zinc-950"
                           : "border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900"
                       }`}
                     >
@@ -613,7 +613,7 @@ export default function MockExamPrepPage() {
                           onClick={() => setDurationInput(String(chip))}
                           className={`px-2.5 py-1 text-xs font-mono font-semibold border transition cursor-pointer disabled:opacity-40 ${
                             durationInput === String(chip)
-                              ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950"
+                              ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-600 dark:bg-zinc-100 dark:text-zinc-950"
                               : "border-zinc-300 dark:border-zinc-700 hover:border-zinc-950 dark:hover:border-zinc-200"
                           }`}
                         >
@@ -652,7 +652,7 @@ export default function MockExamPrepPage() {
                         onClick={() => setQuestionCountInput(String(chip))}
                         className={`px-2.5 py-1 text-xs font-mono font-semibold border transition cursor-pointer ${
                           questionCountInput === String(chip)
-                            ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950"
+                            ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-600 dark:bg-zinc-100 dark:text-zinc-950"
                             : "border-zinc-300 dark:border-zinc-700 hover:border-zinc-950 dark:hover:border-zinc-200"
                         }`}
                       >
@@ -696,7 +696,7 @@ export default function MockExamPrepPage() {
                     type="checkbox"
                     checked={instantAnswers}
                     onChange={(e) => setInstantAnswers(e.target.checked)}
-                    className="mt-1 h-5 w-5 rounded-none border-2 border-zinc-950 dark:border-zinc-100 accent-blue-600 cursor-pointer"
+                    className="mt-1 h-5 w-5 rounded-none border-2 border-zinc-950 dark:border-zinc-600 accent-blue-600 cursor-pointer"
                   />
                   <div>
                     <span className="font-bold text-sm md:text-base group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
@@ -726,7 +726,7 @@ export default function MockExamPrepPage() {
                     onClick={handleSelectAllYears}
                     className={`text-xs font-mono font-bold px-2.5 py-1 border transition cursor-pointer ${
                       isAllYearsSelected
-                        ? "bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 border-zinc-950 dark:border-zinc-100"
+                        ? "bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 border-zinc-950 dark:border-zinc-600"
                         : "border-zinc-300 dark:border-zinc-700 hover:border-zinc-950"
                     }`}
                   >
@@ -753,7 +753,7 @@ export default function MockExamPrepPage() {
                       onClick={() => toggleYear(year)}
                       className={`px-3.5 py-1.5 text-xs font-mono font-bold border-2 transition cursor-pointer flex items-center gap-1.5 ${
                         isSelected
-                          ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950 shadow-xs"
+                          ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-600 dark:bg-zinc-100 dark:text-zinc-950 shadow-xs"
                           : "border-zinc-300 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:border-zinc-950 dark:hover:border-zinc-300 bg-white dark:bg-zinc-900"
                       }`}
                     >
@@ -781,7 +781,7 @@ export default function MockExamPrepPage() {
                     onClick={handleSelectAllTopics}
                     className={`text-xs font-mono font-bold px-2.5 py-1 border transition cursor-pointer ${
                       isAllTopicsSelected
-                        ? "bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 border-zinc-950 dark:border-zinc-100"
+                        ? "bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 border-zinc-950 dark:border-zinc-600"
                         : "border-zinc-300 dark:border-zinc-700 hover:border-zinc-950"
                     }`}
                   >
@@ -842,7 +842,7 @@ export default function MockExamPrepPage() {
                               onClick={() => toggleTopic(topic)}
                               className={`px-3 py-1.5 text-xs font-medium border transition cursor-pointer flex items-center gap-1.5 ${
                                 isSelected
-                                  ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-200 dark:bg-zinc-100 dark:text-zinc-950 shadow-xs"
+                                  ? "border-zinc-950 bg-zinc-950 text-white dark:border-zinc-600 dark:bg-zinc-100 dark:text-zinc-950 shadow-xs"
                                   : "border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-950 dark:hover:border-zinc-300 bg-white dark:bg-zinc-900"
                               }`}
                             >
@@ -868,7 +868,7 @@ export default function MockExamPrepPage() {
           {/* Sticky Summary & Launch Sidebar (Right Column) */}
           <div className="lg:col-span-4 sticky top-6 space-y-4">
             <div className="card-brut p-6 space-y-6">
-              <div className="flex items-center justify-between border-b-2 border-zinc-950 dark:border-zinc-100 pb-3">
+              <div className="flex items-center justify-between border-b-2 border-zinc-950 dark:border-zinc-600 pb-3">
                 <div>
                   <span className="badge-brut bg-blue-100 dark:bg-blue-950/60 text-blue-900 dark:text-blue-200 border-blue-600 dark:border-blue-400">
                     LIVE BLUEPRINT
@@ -880,7 +880,7 @@ export default function MockExamPrepPage() {
               </div>
 
               {/* Prominent Monospace Counter */}
-              <div className="border-2 border-zinc-950 dark:border-zinc-100 bg-zinc-50 dark:bg-zinc-800/60 p-4 text-center space-y-1">
+              <div className="border-2 border-zinc-950 dark:border-zinc-600 bg-zinc-50 dark:bg-zinc-800/60 p-4 text-center space-y-1">
                 <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-bold">
                   Eligible Question Pool
                 </span>

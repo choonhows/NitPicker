@@ -60,7 +60,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
             {/* Dev Mode Stack Dump */}
             {import.meta.env.DEV && this.state.error && (
-              <div className="border-2 border-zinc-950 dark:border-zinc-300 bg-zinc-100 dark:bg-zinc-950 p-4 font-mono text-xs overflow-x-auto max-h-48 text-rose-700 dark:text-rose-400">
+              <div className="border-2 border-zinc-950 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-950 p-4 font-mono text-xs overflow-x-auto max-h-48 text-rose-700 dark:text-rose-400">
                 <p className="font-bold mb-1">Developer Error Details:</p>
                 <pre className="whitespace-pre-wrap">{this.state.error.toString()}</pre>
               </div>

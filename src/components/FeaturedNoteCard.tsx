@@ -28,7 +28,7 @@ export default function FeaturedNoteCard({ note }: { note: FeaturedNote }) {
   return (
     <article className="card-brut flex flex-col justify-between overflow-hidden transition duration-150 hover:-translate-y-1 hover:shadow-[var(--shadow-brut-md)]">
       {/* Visual Header / Preview */}
-      <div className="relative h-48 sm:h-52 w-full border-b-2 border-zinc-950 dark:border-zinc-200 bg-zinc-100 dark:bg-zinc-950 overflow-hidden">
+      <div className="relative h-48 sm:h-52 w-full border-b-2 border-zinc-950 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-950 overflow-hidden">
         {/* Domain & Type Badge Bar */}
         <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
           <span className="badge-brut bg-white/95 dark:bg-zinc-900/95 text-zinc-950 dark:text-zinc-100 shadow-[var(--shadow-brut-2xs)]">
@@ -49,7 +49,7 @@ export default function FeaturedNoteCard({ note }: { note: FeaturedNote }) {
         {isGizmo ? (
           // Bespoke Neo-Brutalist Deck Showcase (avoiding broken iframe refusal)
           <div className="h-full w-full flex flex-col items-center justify-center p-6 bg-linear-to-br from-amber-100/60 via-zinc-100 to-zinc-200 dark:from-amber-950/20 dark:via-zinc-900 dark:to-zinc-950 text-center">
-            <div className="p-3.5 border-2 border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-800 text-amber-600 dark:text-amber-400 shadow-[var(--shadow-brut-sm)] mb-3">
+            <div className="p-3.5 border-2 border-zinc-950 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-amber-600 dark:text-amber-400 shadow-[var(--shadow-brut-sm)] mb-3">
               <Cards className="h-8 w-8" />
             </div>
             <p className="font-heading font-black text-sm uppercase tracking-wider text-zinc-950 dark:text-zinc-100">
@@ -72,7 +72,7 @@ export default function FeaturedNoteCard({ note }: { note: FeaturedNote }) {
         ) : (
           // Document Fallback Banner
           <div className="h-full w-full flex flex-col items-center justify-center p-6 bg-zinc-100 dark:bg-zinc-900 text-center">
-            <div className="p-3.5 border-2 border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-800 text-blue-600 dark:text-blue-400 shadow-[var(--shadow-brut-sm)] mb-3">
+            <div className="p-3.5 border-2 border-zinc-950 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-blue-600 dark:text-blue-400 shadow-[var(--shadow-brut-sm)] mb-3">
               <FileText className="h-8 w-8" />
             </div>
             <p className="font-heading font-black text-sm uppercase tracking-wider text-zinc-950 dark:text-zinc-100">

@@ -8,7 +8,7 @@ const contributors = [
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t-2 border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-950 py-6 px-4 sm:px-6 lg:px-8 mt-auto">
+    <footer className="w-full border-t-2 border-zinc-950 dark:border-zinc-600 bg-white dark:bg-zinc-950 py-6 px-4 sm:px-6 lg:px-8 mt-auto">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         {/* Left: Project Metadata */}
         <div className="flex flex-col gap-1">
@@ -33,7 +33,7 @@ export default function Footer() {
               href="https://github.com/noni-was-taken"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-2 py-0.5 border border-zinc-950 dark:border-zinc-300 font-mono text-xs font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-950 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-950 shadow-[var(--shadow-brut-2xs)] transition"
+              className="inline-flex items-center px-2 py-0.5 border border-zinc-950 dark:border-zinc-600 font-mono text-xs font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-950 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-950 shadow-[var(--shadow-brut-2xs)] transition"
             >
               nonua
             </a>
@@ -49,7 +49,7 @@ export default function Footer() {
                 href={contrib.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-2 py-0.5 border border-zinc-950 dark:border-zinc-300 font-mono text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-950 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-950 shadow-[var(--shadow-brut-2xs)] transition"
+                className="inline-flex items-center px-2 py-0.5 border border-zinc-950 dark:border-zinc-600 font-mono text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-950 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-950 shadow-[var(--shadow-brut-2xs)] transition"
               >
                 {contrib.name}
               </a>
