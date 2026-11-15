@@ -1,22 +1,12 @@
 import { Link } from 'react-router-dom'
-import { ArrowLeft, House, Exam, BookOpenText, Archive } from '@phosphor-icons/react'
+import { ArrowLeft, House, FileCheck as Exam, BookOpenText, Archive } from "lucide-react";
 import Layout from '../components/Layout'
 
 export default function NotFoundPage() {
   return (
     <Layout>
       <main className="flex-1 w-full flex items-center justify-center px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
-        <section className="w-full max-w-xl card-brut p-6 sm:p-10 text-center flex flex-col items-center gap-6 shadow-[5px_5px_0px_0px_#09090b] dark:shadow-[5px_5px_0px_0px_#f4f4f5]">
-          {/* Status Badge */}
-          <div className="flex items-center gap-2">
-            <span className="badge-brut bg-amber-300 dark:bg-amber-400 text-zinc-950">
-              STATUS 404
-            </span>
-            <span className="font-mono text-xs text-zinc-500 dark:text-zinc-400 uppercase font-bold tracking-wider">
-              ROUTE NOT FOUND
-            </span>
-          </div>
-
+        <section className="w-full max-w-xl card-brut p-6 sm:p-10 text-center flex flex-col items-center gap-6 shadow-[var(--shadow-brut-md)]">
           {/* Heading */}
           <div>
             <h1 className="text-4xl sm:text-6xl font-heading font-black tracking-tight text-zinc-950 dark:text-zinc-100 uppercase">
@@ -35,7 +25,7 @@ export default function NotFoundPage() {
             >
               <House className="h-4 w-4" />
               <span>RETURN TO HOMEPAGE</span>
-              <ArrowLeft className="h-4 w-4 rotate-180 group-hover:translate-x-1 transition-transform" />
+              <ArrowLeft className="h-4 w-4 rotate-180" />
             </Link>
           </div>
 

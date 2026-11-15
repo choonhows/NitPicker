@@ -37,7 +37,7 @@ export default function NavBar() {
   ]
 
   return (
-    <header className="w-full sticky top-0 z-40 border-b-2 border-zinc-950 dark:border-zinc-200 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md">
+    <header className="w-full sticky top-0 z-40 border-b-2 border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand / Logo */}
         <Link
@@ -58,7 +58,7 @@ export default function NavBar() {
                 to={item.to}
                 className={`px-3 py-1.5 text-xs font-mono font-bold tracking-wider uppercase transition duration-150 ${
                   item.isActive
-                    ? 'border-2 border-zinc-950 dark:border-zinc-100 bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 shadow-[2px_2px_0px_0px_#09090b] dark:shadow-[2px_2px_0px_0px_#f4f4f5]'
+                    ? 'border-2 border-zinc-950 dark:border-zinc-100 bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 shadow-[var(--shadow-brut-xs)]'
                     : 'border-2 border-transparent text-zinc-700 dark:text-zinc-300 hover:border-zinc-950 dark:hover:border-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-zinc-950 dark:hover:text-zinc-100'
                 }`}
               >
@@ -74,7 +74,7 @@ export default function NavBar() {
             type="button"
             onClick={toggle}
             aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-            className="p-2 border-2 border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-100 shadow-[2px_2px_0px_0px_#09090b] dark:shadow-[2px_2px_0px_0px_#f4f4f5] hover:-translate-x-[1px] hover:-translate-y-[1px] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition cursor-pointer"
+            className="p-2 border-2 border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-100 shadow-[var(--shadow-brut-xs)] hover:-translate-x-[1px] hover:-translate-y-[1px] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition cursor-pointer"
           >
             {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
@@ -86,7 +86,7 @@ export default function NavBar() {
             type="button"
             onClick={toggle}
             aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-            className="p-2 border-2 border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-100 shadow-[2px_2px_0px_0px_#09090b] dark:shadow-[2px_2px_0px_0px_#f4f4f5] transition cursor-pointer"
+            className="p-2 border-2 border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-100 shadow-[var(--shadow-brut-xs)] transition cursor-pointer"
           >
             {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
@@ -97,7 +97,7 @@ export default function NavBar() {
             aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
-            className="p-2 border-2 border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-100 shadow-[2px_2px_0px_0px_#09090b] dark:shadow-[2px_2px_0px_0px_#f4f4f5] transition cursor-pointer"
+            className="p-2 border-2 border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-100 shadow-[var(--shadow-brut-xs)] transition cursor-pointer"
           >
             {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -116,7 +116,7 @@ export default function NavBar() {
               onClick={closeMenu}
               className={`px-4 py-2.5 text-sm font-mono font-bold tracking-wider uppercase border-2 transition ${
                 location.pathname === '/'
-                  ? 'border-zinc-950 dark:border-zinc-100 bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 shadow-[2px_2px_0px_0px_#09090b] dark:shadow-[2px_2px_0px_0px_#f4f4f5]'
+                  ? 'border-zinc-950 dark:border-zinc-100 bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 shadow-[var(--shadow-brut-xs)]'
                   : 'border-zinc-950/20 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-900'
               }`}
             >
@@ -129,7 +129,7 @@ export default function NavBar() {
                 onClick={closeMenu}
                 className={`px-4 py-2.5 text-sm font-mono font-bold tracking-wider uppercase border-2 transition ${
                   item.isActive
-                    ? 'border-zinc-950 dark:border-zinc-100 bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 shadow-[2px_2px_0px_0px_#09090b] dark:shadow-[2px_2px_0px_0px_#f4f4f5]'
+                    ? 'border-zinc-950 dark:border-zinc-100 bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 shadow-[var(--shadow-brut-xs)]'
                     : 'border-zinc-950/20 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-900'
                 }`}
               >

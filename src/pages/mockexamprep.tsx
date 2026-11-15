@@ -1,7 +1,6 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  Sliders,
   Clock,
   HelpCircle,
   AlertTriangle,
@@ -306,9 +305,6 @@ export default function MockExamPrepPage() {
         <div className="border-b-2 border-zinc-950 dark:border-zinc-100 pb-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 mb-2 bg-blue-100 dark:bg-blue-950/60 border border-blue-600 dark:border-blue-400 text-blue-900 dark:text-blue-200 text-xs font-mono font-bold uppercase tracking-wider">
-                <Sliders className="w-3.5 h-3.5" /> PhilNITS FE Exam Studio
-              </div>
               <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight font-heading">
                 Mock Exam Prep
               </h1>

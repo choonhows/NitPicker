@@ -9,7 +9,6 @@ import {
   ChevronsUpDown,
   ChevronsDownUp,
   RotateCcw,
-  BookOpen,
   Bookmark,
 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -297,7 +296,7 @@ const QuestionAccordionItem = React.memo(function QuestionAccordionItem({
             ) : null}
 
             {/* Official Explanation Box */}
-            <div className="border-l-4 border-blue-600 dark:border-blue-400 bg-blue-50/50 dark:bg-blue-950/20 p-4 space-y-2">
+            <div className="border border-zinc-200 dark:border-zinc-800 bg-blue-50/50 dark:bg-blue-950/20 p-4 space-y-2">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-900 dark:text-blue-300">
                   Official Walkthrough & Explanation
@@ -315,7 +314,7 @@ const QuestionAccordionItem = React.memo(function QuestionAccordionItem({
                     )}
                   </ReactMarkdown>
                 ) : (
-                  <p className="text-xs font-mono text-zinc-500 italic">
+                  <p className="text-xs font-mono text-zinc-500">
                     No additional written explanation is recorded in the vault for this question. Refer to choice {question.correctOption} for the verified answer.
                   </p>
                 )}
@@ -493,9 +492,6 @@ export default function PreviousExamsPage() {
         <div className="border-b-2 border-zinc-950 dark:border-zinc-100 pb-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 mb-2 bg-blue-100 dark:bg-blue-950/60 border border-blue-600 dark:border-blue-400 text-blue-900 dark:text-blue-200 text-xs font-mono font-bold uppercase tracking-wider">
-                <BookOpen className="w-3.5 h-3.5" /> PhilNITS Historical Archive
-              </div>
               <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight font-heading">
                 Previous Exam Vault
               </h1>
@@ -537,7 +533,7 @@ export default function PreviousExamsPage() {
         </div>
 
         {/* Sticky Search & Filter Bar */}
-        <div className="sticky top-16 z-30 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md py-4 border-b-2 border-zinc-950 dark:border-zinc-100 shadow-sm space-y-3">
+        <div className="sticky top-16 z-30 bg-white dark:bg-zinc-950 py-4 border-b-2 border-zinc-950 dark:border-zinc-100 shadow-sm space-y-3">
           {/* Top Row: Search Input + Expand/Collapse Button */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <div className="relative flex-1">

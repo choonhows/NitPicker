@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { ArrowSquareOut, Cards, FileText } from '@phosphor-icons/react'
+import { ExternalLink as ArrowSquareOut, Layers as Cards, FileText } from "lucide-react";
 
 export type FeaturedNote = {
   title: string
@@ -26,21 +26,21 @@ export default function FeaturedNoteCard({ note }: { note: FeaturedNote }) {
   const isGoogleDoc = note.embedUrl.includes('docs.google.com')
 
   return (
-    <article className="card-brut flex flex-col justify-between overflow-hidden transition duration-150 hover:-translate-y-1 hover:shadow-[5px_5px_0px_0px_#09090b] dark:hover:shadow-[5px_5px_0px_0px_#f4f4f5]">
+    <article className="card-brut flex flex-col justify-between overflow-hidden transition duration-150 hover:-translate-y-1 hover:shadow-[var(--shadow-brut-md)]">
       {/* Visual Header / Preview */}
       <div className="relative h-48 sm:h-52 w-full border-b-2 border-zinc-950 dark:border-zinc-200 bg-zinc-100 dark:bg-zinc-950 overflow-hidden">
         {/* Domain & Type Badge Bar */}
         <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
-          <span className="badge-brut bg-white/95 dark:bg-zinc-900/95 text-zinc-950 dark:text-zinc-100 shadow-[1px_1px_0px_0px_#09090b] dark:shadow-[1px_1px_0px_0px_#f4f4f5]">
+          <span className="badge-brut bg-white/95 dark:bg-zinc-900/95 text-zinc-950 dark:text-zinc-100 shadow-[var(--shadow-brut-2xs)]">
             {domainLabel}
           </span>
           {isGizmo && (
-            <span className="badge-brut bg-amber-400 text-zinc-950 dark:bg-amber-400 dark:text-zinc-950 shadow-[1px_1px_0px_0px_#09090b] dark:shadow-[1px_1px_0px_0px_#f4f4f5]">
+            <span className="badge-brut bg-amber-400 text-zinc-950 dark:bg-amber-400 dark:text-zinc-950 shadow-[var(--shadow-brut-2xs)]">
               FLASHCARDS
             </span>
           )}
           {isGoogleDoc && (
-            <span className="badge-brut bg-blue-600 text-white dark:bg-blue-500 dark:text-zinc-950 shadow-[1px_1px_0px_0px_#09090b] dark:shadow-[1px_1px_0px_0px_#f4f4f5]">
+            <span className="badge-brut bg-blue-600 text-white dark:bg-blue-500 dark:text-zinc-950 shadow-[var(--shadow-brut-2xs)]">
               STUDY DOC
             </span>
           )}
@@ -49,7 +49,7 @@ export default function FeaturedNoteCard({ note }: { note: FeaturedNote }) {
         {isGizmo ? (
           // Bespoke Neo-Brutalist Deck Showcase (avoiding broken iframe refusal)
           <div className="h-full w-full flex flex-col items-center justify-center p-6 bg-linear-to-br from-amber-100/60 via-zinc-100 to-zinc-200 dark:from-amber-950/20 dark:via-zinc-900 dark:to-zinc-950 text-center">
-            <div className="p-3.5 border-2 border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-800 text-amber-600 dark:text-amber-400 shadow-[3px_3px_0px_0px_#09090b] dark:shadow-[3px_3px_0px_0px_#f4f4f5] mb-3">
+            <div className="p-3.5 border-2 border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-800 text-amber-600 dark:text-amber-400 shadow-[var(--shadow-brut-sm)] mb-3">
               <Cards className="h-8 w-8" />
             </div>
             <p className="font-heading font-black text-sm uppercase tracking-wider text-zinc-950 dark:text-zinc-100">
@@ -72,7 +72,7 @@ export default function FeaturedNoteCard({ note }: { note: FeaturedNote }) {
         ) : (
           // Document Fallback Banner
           <div className="h-full w-full flex flex-col items-center justify-center p-6 bg-zinc-100 dark:bg-zinc-900 text-center">
-            <div className="p-3.5 border-2 border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-800 text-blue-600 dark:text-blue-400 shadow-[3px_3px_0px_0px_#09090b] dark:shadow-[3px_3px_0px_0px_#f4f4f5] mb-3">
+            <div className="p-3.5 border-2 border-zinc-950 dark:border-zinc-200 bg-white dark:bg-zinc-800 text-blue-600 dark:text-blue-400 shadow-[var(--shadow-brut-sm)] mb-3">
               <FileText className="h-8 w-8" />
             </div>
             <p className="font-heading font-black text-sm uppercase tracking-wider text-zinc-950 dark:text-zinc-100">

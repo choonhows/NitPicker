@@ -1,17 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import {
-  BookOpenText,
-  Archive,
-  ArrowRight,
-  Clock,
-  ChartLineUp,
-  BookmarkSimple,
-  Play,
-  ArrowSquareOut,
-  Target,
-  GraduationCap,
-} from '@phosphor-icons/react'
+import { BookOpenText, Archive, ArrowRight, Clock, TrendingUp as ChartLineUp, Bookmark as BookmarkSimple, ExternalLink as ArrowSquareOut, Target } from "lucide-react";
 import Lenis from 'lenis'
 import Layout from '../components/Layout'
 import {
@@ -104,26 +93,6 @@ export default function HomePage() {
 
   return (
     <Layout>
-      {/* Top Technical Metadata Bar */}
-      <div className="w-full border-b-2 border-zinc-950 dark:border-zinc-200 bg-zinc-100 dark:bg-zinc-900/90 py-2.5 px-4">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 font-mono text-[11px] sm:text-xs font-semibold tracking-wider text-zinc-700 dark:text-zinc-300">
-          <div className="flex items-center gap-2">
-            <span className="inline-block h-2 w-2 bg-emerald-500 rounded-full animate-pulse" />
-            <span className="font-bold text-zinc-950 dark:text-zinc-100">PHILNITS FE EXAM PREP</span>
-          </div>
-          <div className="flex items-center gap-4 text-zinc-600 dark:text-zinc-400">
-            <span>BENCHMARK: 60%</span>
-            <span className="hidden md:inline">•</span>
-            <span className="hidden md:inline">1,500+ PAST QUESTIONS</span>
-            <span className="hidden lg:inline">•</span>
-            <span className="hidden lg:inline">JAPAN-PHILIPPINES IT CURRICULUM</span>
-          </div>
-          <div className="font-mono text-zinc-950 dark:text-zinc-100 font-bold">
-            USC CCIS INITIATIVE
-          </div>
-        </div>
-      </div>
-
       {/* Main Workspace Cockpit */}
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -131,21 +100,11 @@ export default function HomePage() {
           {/* Left Column: Command Center & Launchers (7 cols) */}
           <div className="lg:col-span-7 flex flex-col gap-6">
             <div>
-              <div className="flex items-center gap-2.5 mb-3">
-                <span className="badge-brut bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 font-bold">
-                  <GraduationCap className="h-3.5 w-3.5" />
-                  PHILNITS FE SIMULATOR
-                </span>
-                <span className="badge-brut bg-amber-300 dark:bg-amber-400 text-zinc-950 font-bold">
-                  <Clock className="h-3.5 w-3.5" />
-                  APRIL 26 SITTING
-                </span>
-              </div>
               <h1 className="text-3xl sm:text-5xl font-heading font-black tracking-tight text-zinc-950 dark:text-zinc-100 uppercase leading-[1.1]">
-                Targeted Practice For Engineering Certification.
+                Practice PhilNITS FE past papers, timed or by topic.
               </h1>
               <p className="mt-3 text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-xl">
-                Timed 80-question simulations, KaTeX-formatted technical explanations, and instant domain analytics replicating authentic PhilNITS FE examination criteria.
+                Full 80-question mock exams, 20-question drills, and 1,500+ past questions with their official answers.
               </p>
             </div>
 
@@ -183,20 +142,7 @@ export default function HomePage() {
             )}
 
             {/* Exam Launchpad Card */}
-            <div className="card-brut p-5 sm:p-6 flex flex-col gap-5">
-              <div className="flex items-center justify-between border-b-2 border-zinc-950 dark:border-zinc-200 pb-3">
-                <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-                  <Play className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                  RAPID SIMULATION LAUNCHPAD
-                </div>
-                <button
-                  type="button"
-                  onClick={() => navigate('/mockexamprep')}
-                  className="text-xs font-mono font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
-                >
-                  CUSTOMIZE SETTINGS →
-                </button>
-              </div>
+            <div className="flex flex-col gap-5">
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="border-2 border-zinc-950 dark:border-zinc-200 p-4 flex flex-col justify-between gap-3 bg-zinc-50 dark:bg-zinc-800/50">
@@ -245,21 +191,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Quick Metrics Bar */}
-            <div className="grid grid-cols-3 gap-3">
-              <div className="card-brut p-3.5 text-center">
-                <span className="font-mono text-2xl font-bold text-zinc-950 dark:text-zinc-100">60%</span>
-                <p className="text-[11px] font-mono font-bold text-zinc-500 uppercase mt-0.5">Passing Score</p>
-              </div>
-              <div className="card-brut p-3.5 text-center">
-                <span className="font-mono text-2xl font-bold text-zinc-950 dark:text-zinc-100">150m</span>
-                <p className="text-[11px] font-mono font-bold text-zinc-500 uppercase mt-0.5">Morning Session</p>
-              </div>
-              <div className="card-brut p-3.5 text-center">
-                <span className="font-mono text-2xl font-bold text-zinc-950 dark:text-zinc-100">100%</span>
-                <p className="text-[11px] font-mono font-bold text-zinc-500 uppercase mt-0.5">Free & Open</p>
-              </div>
-            </div>
+            <p className="font-mono text-sm text-zinc-600 dark:text-zinc-400">60% to pass · 150-minute morning session · free and open</p>
           </div>
 
           {/* Right Column: Your Personal Study Tracker & Starred Weak Spots (5 cols) */}
@@ -338,7 +270,7 @@ export default function HomePage() {
             <div className="card-brut p-5 sm:p-6 flex flex-col gap-3">
               <div className="flex items-center justify-between border-b-2 border-zinc-950 dark:border-zinc-200 pb-3">
                 <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-zinc-950 dark:text-zinc-100">
-                  <BookmarkSimple className="h-4 w-4 text-amber-500" weight="fill" />
+                  <BookmarkSimple className="h-4 w-4 text-amber-500" fill="currentColor" />
                   STARRED WEAK SPOTS DECK
                 </div>
                 <span className="badge-brut bg-amber-100 dark:bg-amber-900/40 text-amber-900 dark:text-amber-200">
@@ -373,12 +305,12 @@ export default function HomePage() {
         <div className="mt-12 pt-8 border-t-2 border-zinc-950 dark:border-zinc-200 grid grid-cols-1 md:grid-cols-2 gap-6">
           <Link
             to="/previousexams"
-            className="card-brut p-6 hover:shadow-[5px_5px_0px_0px_#09090b] dark:hover:shadow-[5px_5px_0px_0px_#f4f4f5] transition cursor-pointer flex flex-col justify-between group"
+            className="card-brut p-6 hover:shadow-[var(--shadow-brut-md)] transition cursor-pointer flex flex-col justify-between group"
           >
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="badge-brut bg-zinc-100 dark:bg-zinc-800">
-                  700+ PAST QUESTIONS
+                  1,500+ PAST QUESTIONS
                 </span>
                 <Archive className="h-6 w-6 text-zinc-700 dark:text-zinc-300 group-hover:scale-110 transition-transform" />
               </div>
@@ -391,13 +323,13 @@ export default function HomePage() {
             </div>
             <div className="mt-5 flex items-center gap-1.5 font-mono text-xs font-bold text-blue-600 dark:text-blue-400">
               <span>EXPLORE PAST PAPERS</span>
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-4 w-4" />
             </div>
           </Link>
 
           <Link
             to="/notes"
-            className="card-brut p-6 hover:shadow-[5px_5px_0px_0px_#09090b] dark:hover:shadow-[5px_5px_0px_0px_#f4f4f5] transition cursor-pointer flex flex-col justify-between group"
+            className="card-brut p-6 hover:shadow-[var(--shadow-brut-md)] transition cursor-pointer flex flex-col justify-between group"
           >
             <div>
               <div className="flex items-center justify-between mb-3">
@@ -415,7 +347,7 @@ export default function HomePage() {
             </div>
             <div className="mt-5 flex items-center gap-1.5 font-mono text-xs font-bold text-blue-600 dark:text-blue-400">
               <span>ACCESS STUDY NOTES</span>
-              <ArrowSquareOut className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowSquareOut className="h-4 w-4" />
             </div>
           </Link>
         </div>

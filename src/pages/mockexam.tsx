@@ -8,26 +8,7 @@ import Layout from "../components/Layout";
 import { MOCK_EXAM_IMAGE_BASE_PATH } from "../config/constants";
 import { normalizeLegacySymbols, normalizeMathDelimiters } from "../lib/textFormat";
 import { trackEvent } from "../lib/analytics";
-import {
-  ArrowsOutIcon,
-  BookmarkSimpleIcon,
-  CaretLeftIcon,
-  CaretRightIcon,
-  CheckCircleIcon,
-  ClockIcon,
-  EyeIcon,
-  EyeSlashIcon,
-  FlagIcon,
-  LightbulbIcon,
-  PauseCircleIcon,
-  PlayCircleIcon,
-  QuestionIcon,
-  SmileySadIcon,
-  SquaresFourIcon,
-  WarningIcon,
-  XCircleIcon,
-  XIcon,
-} from "@phosphor-icons/react";
+import { Maximize2 as ArrowsOutIcon, Bookmark as BookmarkSimpleIcon, ChevronLeft as CaretLeftIcon, ChevronRight as CaretRightIcon, CircleCheck as CheckCircleIcon, Clock as ClockIcon, Eye as EyeIcon, EyeOff as EyeSlashIcon, Flag as FlagIcon, Lightbulb as LightbulbIcon, CirclePause as PauseCircleIcon, CirclePlay as PlayCircleIcon, CircleHelp as QuestionIcon, Frown as SmileySadIcon, LayoutGrid as SquaresFourIcon, TriangleAlert as WarningIcon, CircleX as XCircleIcon, X as XIcon } from "lucide-react";
 import {
   clearMockExamSession,
   computeMockExamResult,
@@ -555,7 +536,7 @@ export default function MockExamPage() {
       <Layout className="py-10 md:py-0 gap-6 md:gap-10 select-none">
         <div className="flex-1 w-full flex items-center justify-center px-6 md:px-20 min-h-[60vh]">
           <div className="card-brut p-8 md:p-10 w-full max-w-xl flex flex-col items-center gap-6 text-center">
-            <SmileySadIcon className="h-16 w-auto text-zinc-700 dark:text-zinc-300" weight="bold" />
+            <SmileySadIcon className="h-16 w-auto text-zinc-700 dark:text-zinc-300" strokeWidth={2.5} />
             <h1 className="text-3xl md:text-4xl font-bold">No active mock exam found</h1>
             <p className="text-sm md:text-base opacity-75">
               Start from the prep page so we can build an exam tailored to your selected settings.
@@ -593,7 +574,7 @@ export default function MockExamPage() {
   return (
     <Layout className="p-0 min-h-screen dark:text-zinc-100 flex flex-col bg-zinc-50 dark:bg-zinc-950">
       {/* Top Edge Progress Bar */}
-      <div className="sticky top-0 z-40 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md border-b-2 border-zinc-950 dark:border-zinc-100">
+      <div className="sticky top-0 z-40 bg-white dark:bg-zinc-950 border-b-2 border-zinc-950 dark:border-zinc-100">
         <div className="w-full h-1.5 bg-zinc-200 dark:bg-zinc-800">
           <div
             style={{ width: `${totalQuestions > 0 ? (answeredCount / totalQuestions) * 100 : 0}%` }}
@@ -620,7 +601,7 @@ export default function MockExamPage() {
           <div className="flex items-center gap-3 sm:gap-6">
             {/* Per-question stopwatch */}
             <div className="hidden lg:flex items-center gap-2 border border-zinc-300 dark:border-zinc-700 px-2.5 py-1 bg-white dark:bg-zinc-900 text-xs font-mono">
-              <ClockIcon className="h-4 w-4 opacity-70" weight="bold" />
+              <ClockIcon className="h-4 w-4 opacity-70" strokeWidth={2.5} />
               <span className="w-12 text-center font-bold">
                 {isQuestionTimerVisible ? formatClockFromSeconds(questionElapsedSeconds, false) : "••:••"}
               </span>
@@ -632,9 +613,9 @@ export default function MockExamPage() {
                 aria-label={isQuestionTimerVisible ? "Hide question stopwatch" : "Show question stopwatch"}
               >
                 {isQuestionTimerVisible ? (
-                  <EyeSlashIcon className="h-3.5 w-3.5" weight="bold" />
+                  <EyeSlashIcon className="h-3.5 w-3.5" strokeWidth={2.5} />
                 ) : (
-                  <EyeIcon className="h-3.5 w-3.5" weight="bold" />
+                  <EyeIcon className="h-3.5 w-3.5" strokeWidth={2.5} />
                 )}
               </button>
               <button
@@ -645,9 +626,9 @@ export default function MockExamPage() {
                 aria-label={isQuestionTimerPaused ? "Resume question stopwatch" : "Pause question stopwatch"}
               >
                 {isQuestionTimerPaused ? (
-                  <PlayCircleIcon className="h-3.5 w-3.5 text-amber-500" weight="bold" />
+                  <PlayCircleIcon className="h-3.5 w-3.5 text-amber-500" strokeWidth={2.5} />
                 ) : (
-                  <PauseCircleIcon className="h-3.5 w-3.5" weight="bold" />
+                  <PauseCircleIcon className="h-3.5 w-3.5" strokeWidth={2.5} />
                 )}
               </button>
             </div>
@@ -672,9 +653,9 @@ export default function MockExamPage() {
                 aria-label={isOverallTimerPaused ? "Resume overall exam timer" : "Pause overall exam timer"}
               >
                 {isOverallTimerPaused ? (
-                  <PlayCircleIcon className="h-6 sm:h-7 w-auto text-emerald-600 dark:text-emerald-400" weight="bold" />
+                  <PlayCircleIcon className="h-6 sm:h-7 w-auto text-emerald-600 dark:text-emerald-400" strokeWidth={2.5} />
                 ) : (
-                  <PauseCircleIcon className="h-6 sm:h-7 w-auto text-zinc-950 dark:text-zinc-100" weight="bold" />
+                  <PauseCircleIcon className="h-6 sm:h-7 w-auto text-zinc-950 dark:text-zinc-100" strokeWidth={2.5} />
                 )}
               </button>
             </div>
@@ -694,7 +675,7 @@ export default function MockExamPage() {
               title="Flag for review [F]"
               aria-label="Flag question for review"
             >
-              <FlagIcon className="h-3.5 w-3.5" weight={isFlagged ? "fill" : "bold"} />
+              <FlagIcon className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">{isFlagged ? "FLAGGED" : "FLAG"}</span>
               <span className="hidden lg:inline text-[10px] opacity-60">[F]</span>
             </button>
@@ -711,7 +692,7 @@ export default function MockExamPage() {
               title="Bookmark to Weak Spots deck [S]"
               aria-label="Bookmark question"
             >
-              <BookmarkSimpleIcon className="h-3.5 w-3.5" weight={isBookmarked ? "fill" : "bold"} />
+              <BookmarkSimpleIcon className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">{isBookmarked ? "SAVED" : "STAR"}</span>
               <span className="hidden lg:inline text-[10px] opacity-60">[S]</span>
             </button>
@@ -725,7 +706,7 @@ export default function MockExamPage() {
               title="Use 50/50 hint [H]"
               aria-label="Eliminate up to two incorrect options"
             >
-              <LightbulbIcon className="h-3.5 w-3.5" weight={hintVisible ? "fill" : "bold"} />
+              <LightbulbIcon className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">HINT</span>
               <span className="hidden lg:inline text-[10px] opacity-60">[H]</span>
             </button>
@@ -742,7 +723,7 @@ export default function MockExamPage() {
               title="Open question matrix"
               aria-label="Toggle question navigator matrix"
             >
-              <SquaresFourIcon className="h-3.5 w-3.5" weight="bold" />
+              <SquaresFourIcon className="h-3.5 w-3.5" strokeWidth={2.5} />
               <span className="hidden sm:inline">MATRIX</span>
             </button>
 
@@ -754,7 +735,7 @@ export default function MockExamPage() {
               title="Keyboard shortcuts [?]"
               aria-label="View keyboard shortcuts"
             >
-              <QuestionIcon className="h-3.5 w-3.5" weight="bold" />
+              <QuestionIcon className="h-3.5 w-3.5" strokeWidth={2.5} />
               <span>[?]</span>
             </button>
 
@@ -766,7 +747,7 @@ export default function MockExamPage() {
               title="Toggle Fullscreen Zen Mode"
               aria-label="Toggle Fullscreen"
             >
-              <ArrowsOutIcon className="h-3.5 w-3.5" weight="bold" />
+              <ArrowsOutIcon className="h-3.5 w-3.5" strokeWidth={2.5} />
             </button>
 
             {/* Submit Exam Button */}
@@ -784,8 +765,8 @@ export default function MockExamPage() {
         {isOverallTimerPaused ? (
           <div className="bg-amber-400 text-zinc-950 border-t border-zinc-950 px-4 py-2 flex items-center justify-between font-mono text-xs md:text-sm font-bold">
             <div className="flex items-center gap-2">
-              <PauseCircleIcon className="h-5 w-5 shrink-0" weight="bold" />
-              <span>EXAM PAUSED — Timers and question progress are paused.</span>
+              <PauseCircleIcon className="h-5 w-5 shrink-0" strokeWidth={2.5} />
+              <span>EXAM PAUSED. Timers and question progress are paused.</span>
             </div>
             <button
               type="button"
@@ -828,7 +809,7 @@ export default function MockExamPage() {
                 className="p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer"
                 aria-label="Close question matrix"
               >
-                <XIcon className="h-5 w-5" weight="bold" />
+                <XIcon className="h-5 w-5" strokeWidth={2.5} />
               </button>
             </div>
 
@@ -946,7 +927,7 @@ export default function MockExamPage() {
                   }}
                 />
                 <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 px-2 py-1 text-xs font-mono font-bold flex items-center gap-1 shadow-md">
-                  <ArrowsOutIcon className="h-3.5 w-3.5" weight="bold" />
+                  <ArrowsOutIcon className="h-3.5 w-3.5" strokeWidth={2.5} />
                   <span>ZOOM</span>
                 </div>
               </div>
@@ -955,8 +936,8 @@ export default function MockExamPage() {
 
           {/* Hint Active Notice */}
           {hintVisible ? (
-            <div className="bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-500 p-3 text-xs md:text-sm font-mono flex items-center gap-2 text-amber-900 dark:text-amber-200">
-              <LightbulbIcon className="h-4 w-4 shrink-0" weight="fill" />
+            <div className="bg-amber-50 dark:bg-amber-950/40 border border-zinc-200 dark:border-zinc-800 p-3 text-xs md:text-sm font-mono flex items-center gap-2 text-amber-900 dark:text-amber-200">
+              <LightbulbIcon className="h-4 w-4 shrink-0" />
               <span>Hint active: {eliminatedOptionSet.size} wrong option(s) eliminated.</span>
             </div>
           ) : null}
@@ -1025,7 +1006,7 @@ export default function MockExamPage() {
                         {renderedChoiceTexts[letter]}
                       </div>
                     ) : (
-                      <span className="text-xs font-mono opacity-50 italic">
+                      <span className="text-xs font-mono opacity-50">
                         {isEliminated ? "Option eliminated" : "Diagram only"}
                       </span>
                     )}
@@ -1050,9 +1031,9 @@ export default function MockExamPage() {
                   {instantRevealEnabled ? (
                     <div className="shrink-0 self-center">
                       {isCorrectOption ? (
-                        <CheckCircleIcon className="h-6 w-6 text-emerald-600 dark:text-emerald-400" weight="fill" />
+                        <CheckCircleIcon className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
                       ) : isSelected ? (
-                        <XCircleIcon className="h-6 w-6 text-red-600 dark:text-red-400" weight="fill" />
+                        <XCircleIcon className="h-6 w-6 text-red-600 dark:text-red-400" />
                       ) : null}
                     </div>
                   ) : isSelected ? (
@@ -1068,14 +1049,14 @@ export default function MockExamPage() {
             <div className="flex flex-col gap-3 mt-2">
               {selectedAnswerIsCorrect ? (
                 <div className="border-2 border-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 p-4 flex items-center gap-3 text-emerald-950 dark:text-emerald-100 font-mono font-bold text-sm">
-                  <CheckCircleIcon className="h-6 w-6 text-emerald-600 shrink-0" weight="fill" />
+                  <CheckCircleIcon className="h-6 w-6 text-emerald-600 shrink-0" />
                   <div>CORRECT ANSWER! Well done.</div>
                 </div>
               ) : (
                 <div className="border-2 border-red-600 bg-red-50 dark:bg-red-950/40 p-4 flex items-center gap-3 text-red-950 dark:text-red-100 font-mono font-bold text-sm">
-                  <XCircleIcon className="h-6 w-6 text-red-600 shrink-0" weight="fill" />
+                  <XCircleIcon className="h-6 w-6 text-red-600 shrink-0" />
                   <div>
-                    INCORRECT — The correct answer is Option {currentQuestion.correctOption}.
+                    INCORRECT. The correct answer is Option {currentQuestion.correctOption}.
                   </div>
                 </div>
               )}
@@ -1120,7 +1101,7 @@ export default function MockExamPage() {
             disabled={currentIndex === 0}
             className="btn-outline px-4 sm:px-6 py-2.5 sm:py-3 flex items-center gap-2 text-xs sm:text-sm disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            <CaretLeftIcon className="h-4 w-4" weight="bold" />
+            <CaretLeftIcon className="h-4 w-4" strokeWidth={2.5} />
             <span>PREVIOUS</span>
           </button>
 
@@ -1141,7 +1122,7 @@ export default function MockExamPage() {
                 className="btn-solid px-5 sm:px-8 py-2.5 sm:py-3 flex items-center gap-2 text-xs sm:text-sm disabled:opacity-30 disabled:cursor-not-allowed"
               >
                 <span>NEXT QUESTION</span>
-                <CaretRightIcon className="h-4 w-4" weight="bold" />
+                <CaretRightIcon className="h-4 w-4" strokeWidth={2.5} />
               </button>
             )}
           </div>
@@ -1193,7 +1174,7 @@ export default function MockExamPage() {
                 className="p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 font-bold cursor-pointer"
                 aria-label="Close diagram preview"
               >
-                <XIcon className="h-5 w-5" weight="bold" />
+                <XIcon className="h-5 w-5" strokeWidth={2.5} />
               </button>
             </div>
             <div className="overflow-auto max-h-[75vh] w-full flex items-center justify-center p-2">
@@ -1229,7 +1210,7 @@ export default function MockExamPage() {
                 className="p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer"
                 aria-label="Close submit confirmation dialog"
               >
-                <XIcon className="h-5 w-5" weight="bold" />
+                <XIcon className="h-5 w-5" strokeWidth={2.5} />
               </button>
             </div>
 
@@ -1271,8 +1252,8 @@ export default function MockExamPage() {
             </div>
 
             {unansweredCount > 0 ? (
-              <div className="border-l-4 border-amber-500 bg-amber-50 dark:bg-amber-950/40 p-3 text-xs sm:text-sm font-mono flex items-start gap-2.5 text-amber-950 dark:text-amber-200">
-                <WarningIcon className="h-5 w-5 shrink-0 text-amber-600" weight="fill" />
+              <div className="border border-zinc-200 dark:border-zinc-800 bg-amber-50 dark:bg-amber-950/40 p-3 text-xs sm:text-sm font-mono flex items-start gap-2.5 text-amber-950 dark:text-amber-200">
+                <WarningIcon className="h-5 w-5 shrink-0 text-amber-600" />
                 <span>
                   You have <strong>{unansweredCount} unanswered questions</strong>. Once submitted, your answers cannot be modified and unanswered items will count as incorrect.
                 </span>
@@ -1317,7 +1298,7 @@ export default function MockExamPage() {
           >
             <div className="flex items-center justify-between pb-3 border-b-2 border-zinc-950 dark:border-zinc-100">
               <div className="flex items-center gap-2">
-                <QuestionIcon className="h-5 w-5 text-blue-600 dark:text-blue-400" weight="bold" />
+                <QuestionIcon className="h-5 w-5 text-blue-600 dark:text-blue-400" strokeWidth={2.5} />
                 <h2 className="text-xl font-bold font-mono uppercase tracking-tight">
                   Keyboard Shortcuts
                 </h2>
@@ -1328,7 +1309,7 @@ export default function MockExamPage() {
                 className="p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer"
                 aria-label="Close shortcuts modal"
               >
-                <XIcon className="h-5 w-5" weight="bold" />
+                <XIcon className="h-5 w-5" strokeWidth={2.5} />
               </button>
             </div>
 
