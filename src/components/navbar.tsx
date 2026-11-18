@@ -76,7 +76,7 @@ export default function NavBar() {
             aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             className="p-2 border-2 border-zinc-950 dark:border-zinc-600 bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-100 shadow-[var(--shadow-brut-xs)] hover:-translate-x-[1px] hover:-translate-y-[1px] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition cursor-pointer"
           >
-            {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            {isDark ? <Sun key="sun" className="h-4 w-4 motion-fade" /> : <Moon key="moon" className="h-4 w-4 motion-fade" />}
           </button>
         </div>
 
@@ -88,7 +88,7 @@ export default function NavBar() {
             aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             className="p-2 border-2 border-zinc-950 dark:border-zinc-600 bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-100 shadow-[var(--shadow-brut-xs)] transition cursor-pointer"
           >
-            {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            {isDark ? <Sun key="sun" className="h-4 w-4 motion-fade" /> : <Moon key="moon" className="h-4 w-4 motion-fade" />}
           </button>
 
           <button
@@ -108,7 +108,7 @@ export default function NavBar() {
       {isOpen && (
         <div
           id="mobile-navigation"
-          className="md:hidden border-t-2 border-zinc-950 dark:border-zinc-600 bg-white dark:bg-zinc-950 px-4 py-5 shadow-2xl animate-in slide-in-from-top-2 duration-150"
+          className="md:hidden border-t-2 border-zinc-950 dark:border-zinc-600 bg-white dark:bg-zinc-950 px-4 py-5 shadow-2xl motion-drop"
         >
           <nav className="flex flex-col gap-2.5" aria-label="Mobile Navigation">
             <Link

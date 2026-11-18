@@ -601,8 +601,9 @@ export default function MockExamPrepPage() {
                       inputMode="numeric"
                       disabled={!isTimed}
                       value={durationInput}
+                      aria-label="Duration in minutes"
                       onChange={(e) => setDurationInput(e.target.value.replace(/\D/g, ""))}
-                      className="form-input w-28 text-center text-sm font-bold disabled:opacity-40"
+                      className="form-input w-28 text-center text-base font-bold disabled:opacity-40"
                     />
                     <div className="flex items-center gap-1">
                       {DURATION_CHIPS.map((chip) => (
@@ -641,8 +642,9 @@ export default function MockExamPrepPage() {
                     type="text"
                     inputMode="numeric"
                     value={questionCountInput}
+                    aria-label="Number of questions"
                     onChange={(e) => setQuestionCountInput(e.target.value.replace(/\D/g, ""))}
-                    className="form-input w-28 text-center text-sm font-bold"
+                    className="form-input w-28 text-center text-base font-bold"
                   />
                   <div className="flex flex-wrap items-center gap-1.5">
                     {QUESTION_CHIPS.map((chip) => (

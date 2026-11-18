@@ -102,7 +102,7 @@ export default function NotesPage() {
         {/* Featured Notes Grid */}
         <section
           aria-label="Study notes list"
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 pb-10"
+          className="reveal grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 pb-10"
         >
           {featuredNotes.map((note) => (
             <FeaturedNoteCard key={note.url} note={note} />

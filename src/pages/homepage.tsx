@@ -12,7 +12,7 @@ import {
   type ExamHistoryEntry,
   type MockExamSession,
 } from '../exam/mockExamModel'
-import { buildMockExamSession, buildStarredQuestionsSession } from '../exam/mockExamQuestionBank'
+import { buildMockExamSession, buildStarredQuestionsSession, getAllAvailableTopics, getAllAvailableYears } from '../exam/mockExamQuestionBank'
 
 export default function HomePage() {
   const navigate = useNavigate()
@@ -48,8 +48,8 @@ export default function HomePage() {
       durationMinutes: 150,
       questionCount: 80,
       instantAnswers: false,
-      selectedTopics: [],
-      selectedYears: [],
+      selectedTopics: getAllAvailableTopics(),
+      selectedYears: getAllAvailableYears(),
     })
     saveMockExamSession(newSession)
     navigate('/mockexam')
@@ -62,8 +62,8 @@ export default function HomePage() {
       durationMinutes: 30,
       questionCount: 20,
       instantAnswers: true,
-      selectedTopics: [],
-      selectedYears: [],
+      selectedTopics: getAllAvailableTopics(),
+      selectedYears: getAllAvailableYears(),
     })
     saveMockExamSession(newSession)
     navigate('/mockexam')
@@ -302,7 +302,7 @@ export default function HomePage() {
         </div>
 
         {/* Bottom Dual Portals: Archive & Notes */}
-        <div className="mt-12 pt-8 border-t-2 border-zinc-950 dark:border-zinc-600 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="reveal mt-12 pt-8 border-t-2 border-zinc-950 dark:border-zinc-600 grid grid-cols-1 md:grid-cols-2 gap-6">
           <Link
             to="/previousexams"
             className="card-brut p-6 hover:shadow-[var(--shadow-brut-md)] transition cursor-pointer flex flex-col justify-between group"
