@@ -543,6 +543,12 @@ const canonicalizeQuestionNumber = (num: string): string => {
   return num.trim();
 };
 
+const pickVisuals = (q: ParsedVaultQuestion) => ({
+  questionImagePath: q.questionImagePath,
+  tableMarkdown: q.tableMarkdown,
+  containsMarkdownTable: q.containsMarkdownTable,
+});
+
 const deduplicatedVaultQuestionsMap = new Map<string, ParsedVaultQuestion>();
 
 for (const q of rawParsedVaultQuestions) {
@@ -567,9 +573,9 @@ for (const q of rawParsedVaultQuestions) {
 
     deduplicatedVaultQuestionsMap.set(key, {
       ...preferredBase,
-      questionImagePath: preferredBase.questionImagePath ?? fallback.questionImagePath,
-      tableMarkdown: preferredBase.tableMarkdown ?? fallback.tableMarkdown,
-      containsMarkdownTable: preferredBase.containsMarkdownTable || fallback.containsMarkdownTable,
+      // Visuals come from one file only: mixing an image from one copy with a table from another
+      // showed the same table twice (e.g. 2023A_FE_AM_9 and _09).
+      ...pickVisuals(preferredBase.questionImagePath || preferredBase.tableMarkdown ? preferredBase : fallback),
       subjectTopic: preferredBase.subjectTopic !== "Software Engineering & Design" ? preferredBase.subjectTopic : fallback.subjectTopic,
     });
   }
