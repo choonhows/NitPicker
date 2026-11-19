@@ -11,6 +11,7 @@ import {
   RotateCcw,
   Bookmark,
 } from "lucide-react";
+import ReportQuestionButton from "../components/ReportQuestionButton";
 import { AnimatePresence, motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -97,7 +98,7 @@ const QuestionAccordionItem = React.memo(function QuestionAccordionItem({
   return (
     <article className="border-2 border-zinc-950 dark:border-zinc-600 bg-white dark:bg-zinc-900 transition shadow-xs">
       {/* Question Accordion Header */}
-      <div className="flex items-start">
+      <div className="flex flex-col sm:flex-row sm:items-start">
       <button
         type="button"
         aria-expanded={isOpen}
@@ -141,11 +142,13 @@ const QuestionAccordionItem = React.memo(function QuestionAccordionItem({
           }`}
         />
       </button>
+      {/* Phones: actions sit in a row under the header; wider: beside it */}
+      <div className="flex gap-2 px-4 pb-4 sm:p-4 sm:pl-0 shrink-0">
       <button
         type="button"
         aria-pressed={isBookmarked}
         onClick={() => onToggleBookmark(question.id)}
-        className={`badge-brut m-4 ml-0 shrink-0 cursor-pointer transition-colors ${
+        className={`badge-brut shrink-0 cursor-pointer transition-colors ${
           isBookmarked
             ? "bg-amber-400 text-zinc-950 border-zinc-950 font-bold"
             : "bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:border-zinc-950"
@@ -155,6 +158,8 @@ const QuestionAccordionItem = React.memo(function QuestionAccordionItem({
         <Bookmark className="w-3 h-3 fill-current" />
         <span>{isBookmarked ? "STARRED" : "STAR"}</span>
       </button>
+      <ReportQuestionButton questionCode={`${question.examCode}_${question.questionNumber}`} />
+      </div>
       </div>
 
       {/* Expanded Question Content */}
