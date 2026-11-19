@@ -7,3 +7,7 @@ export const UI_LIMITS = {
   defaultDurationMinutes: 90,
   defaultQuestionCount: 80,
 } as const
+
+// Google Form "NitPicker question reports" (owned by the maintainers); the question code field is pre-filled.
+export const reportQuestionUrl = (questionCode: string) =>
+  `https://docs.google.com/forms/d/e/1FAIpQLSdKyqKRs2PNqJqqh9SQGQAvkijtYfoHusgoNO9x6uU4W8d1AA/viewform?usp=pp_url&entry.1221462421=${encodeURIComponent(questionCode)}`

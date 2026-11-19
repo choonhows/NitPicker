@@ -5,10 +5,10 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import Layout from "../components/Layout";
-import { MOCK_EXAM_IMAGE_BASE_PATH } from "../config/constants";
+import { MOCK_EXAM_IMAGE_BASE_PATH, reportQuestionUrl } from "../config/constants";
 import { normalizeLegacySymbols, normalizeMathDelimiters } from "../lib/textFormat";
 import { trackEvent } from "../lib/analytics";
-import { Maximize2 as ArrowsOutIcon, Bookmark as BookmarkSimpleIcon, ChevronLeft as CaretLeftIcon, ChevronRight as CaretRightIcon, CircleCheck as CheckCircleIcon, Clock as ClockIcon, Eye as EyeIcon, EyeOff as EyeSlashIcon, Flag as FlagIcon, Lightbulb as LightbulbIcon, CirclePause as PauseCircleIcon, CirclePlay as PlayCircleIcon, CircleHelp as QuestionIcon, Frown as SmileySadIcon, LayoutGrid as SquaresFourIcon, TriangleAlert as WarningIcon, CircleX as XCircleIcon, X as XIcon } from "lucide-react";
+import { Maximize2 as ArrowsOutIcon, Bookmark as BookmarkSimpleIcon, ChevronLeft as CaretLeftIcon, ChevronRight as CaretRightIcon, CircleCheck as CheckCircleIcon, Clock as ClockIcon, Eye as EyeIcon, EyeOff as EyeSlashIcon, Flag as FlagIcon, Lightbulb as LightbulbIcon, CirclePause as PauseCircleIcon, CirclePlay as PlayCircleIcon, CircleHelp as QuestionIcon, Frown as SmileySadIcon, LayoutGrid as SquaresFourIcon, TriangleAlert as WarningIcon, TriangleAlert, CircleX as XCircleIcon, X as XIcon } from "lucide-react";
 import {
   clearMockExamSession,
   computeMockExamResult,
@@ -884,6 +884,16 @@ export default function MockExamPage() {
               <span className="font-mono text-xs uppercase opacity-70">
                 Topic: <strong>{currentQuestion.subjectTopic}</strong>
               </span>
+              <a
+          href={reportQuestionUrl(currentQuestion.id.replace("::", "_"))}
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Report a problem with this question"
+          className="badge-brut text-[11px] shrink-0 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:border-zinc-950 dark:hover:border-zinc-300"
+        >
+          <TriangleAlert className="w-3 h-3" />
+          <span>REPORT</span>
+        </a>
             </div>
           </div>
 
