@@ -10,9 +10,8 @@ import {
   ChevronsDownUp,
   RotateCcw,
   Bookmark,
-  TriangleAlert,
 } from "lucide-react";
-import { reportQuestionUrl } from "../config/constants";
+import ReportQuestionButton from "../components/ReportQuestionButton";
 import { AnimatePresence, motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -159,16 +158,7 @@ const QuestionAccordionItem = React.memo(function QuestionAccordionItem({
         <Bookmark className="w-3 h-3 fill-current" />
         <span>{isBookmarked ? "STARRED" : "STAR"}</span>
       </button>
-      <a
-          href={reportQuestionUrl(`${question.examCode}_${question.questionNumber}`)}
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Report a problem with this question"
-          className="badge-brut shrink-0 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:border-zinc-950 dark:hover:border-zinc-300"
-        >
-          <TriangleAlert className="w-3 h-3" />
-          <span>REPORT</span>
-        </a>
+      <ReportQuestionButton questionCode={`${question.examCode}_${question.questionNumber}`} />
       </div>
       </div>
 

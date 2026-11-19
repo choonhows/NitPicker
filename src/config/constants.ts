@@ -8,6 +8,7 @@ export const UI_LIMITS = {
   defaultQuestionCount: 80,
 } as const
 
-// Google Form "NitPicker question reports" (owned by the maintainers); the question code field is pre-filled.
-export const reportQuestionUrl = (questionCode: string) =>
-  `https://docs.google.com/forms/d/e/1FAIpQLSdKyqKRs2PNqJqqh9SQGQAvkijtYfoHusgoNO9x6uU4W8d1AA/viewform?usp=pp_url&entry.1221462421=${encodeURIComponent(questionCode)}`
+// Supabase project for question reports. The publishable key is meant for browser code;
+// the question_reports table only lets visitors insert (see the RLS policy in Supabase).
+export const SUPABASE_URL = "https://oawmeieyurmqdmyvqrbe.supabase.co"
+export const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_d1Mkk5hKwFw3KG6nAS6XcA_j0VzqHWN"
