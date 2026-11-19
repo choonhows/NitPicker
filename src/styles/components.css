@@ -3,11 +3,25 @@
     @apply border-2 border-zinc-950 dark:border-zinc-500 bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-100 font-bold tracking-wide transition duration-150 cursor-pointer;
   }
 
-  .btn-outline:hover:not(:disabled) {
-    @apply bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950;
-    box-shadow: var(--shadow-brut-sm);
-    transform: translate(-1px, -1px);
+  @media (hover: hover) {
+    .btn-outline:hover:not(:disabled) {
+      @apply bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950;
+      box-shadow: var(--shadow-brut-sm);
+      transform: translate(-1px, -1px);
+    }
+    .btn-solid:hover:not(:disabled) {
+      @apply bg-blue-600 border-zinc-950 text-white dark:bg-blue-500 dark:border-zinc-100 dark:text-zinc-950;
+      transform: translate(-1px, -1px);
+    }
   }
+
+  /* Press: the button pushes into the page, fast; release eases back. */
+  .btn-outline, .btn-solid {
+    transition-property: transform, background-color, color, border-color;
+    transition-duration: var(--dur-fast);
+    transition-timing-function: var(--ease-out);
+  }
+  .btn-outline:active:not(:disabled), .btn-solid:active:not(:disabled) { transition-duration: var(--dur-press); }
 
   .btn-outline:active:not(:disabled) {
     transform: translate(1px, 1px);
@@ -17,11 +31,6 @@
   .btn-solid {
     @apply border-2 border-zinc-950 dark:border-zinc-100 bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 font-bold tracking-wide transition duration-150 cursor-pointer;
     box-shadow: var(--shadow-brut-sm);
-  }
-
-  .btn-solid:hover:not(:disabled) {
-    @apply bg-blue-600 border-zinc-950 text-white dark:bg-blue-500 dark:border-zinc-100 dark:text-zinc-950;
-    transform: translate(-1px, -1px);
   }
 
   .btn-solid:active:not(:disabled) {
@@ -34,6 +43,10 @@
     box-shadow: var(--shadow-brut-sm);
   }
 
+  a.card-brut { transition: transform var(--dur-base) var(--ease-out); }
+  @media (hover: hover) { a.card-brut:hover { transform: translate(-2px, -2px); } }
+  a.card-brut:active { transform: translate(1px, 1px); transition-duration: var(--dur-press); }
+
   .badge-brut {
     @apply inline-flex items-center gap-1.5 border border-zinc-950 dark:border-zinc-600 px-2.5 py-0.5 text-xs font-mono font-semibold uppercase tracking-wider;
   }
@@ -44,11 +57,13 @@
 
   .modal-overlay {
     @apply fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4;
+    animation: fade-in var(--dur-fast) var(--ease-out);
   }
 
   .modal-panel {
     @apply w-full max-w-xl border-2 border-zinc-950 dark:border-zinc-600 bg-white dark:bg-zinc-900 p-6 md:p-8;
     box-shadow: var(--shadow-brut-md);
+    animation: panel-in var(--dur-base) var(--ease-out);
   }
 }
 

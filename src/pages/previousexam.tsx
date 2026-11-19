@@ -161,7 +161,7 @@ const QuestionAccordionItem = React.memo(function QuestionAccordionItem({
       {isOpen ? (
         <div
           id={`question-content-${question.id}`}
-          className="border-t-2 border-zinc-200 dark:border-zinc-800 overflow-hidden"
+          className="border-t-2 border-zinc-200 dark:border-zinc-800 overflow-hidden motion-fade"
         >
           <div className="p-4 md:p-6 space-y-5 bg-white dark:bg-zinc-900">
             {/* Markdown Table if present */}

@@ -527,7 +527,7 @@ export default function MockExamResultsPage() {
       <Layout className="py-10 md:py-0 dark:text-zinc-100 gap-6 md:gap-10 select-none">
         <div className="flex-1 w-full flex items-center justify-center px-6 md:px-20 min-h-[60vh]">
           <div className="card-brut p-8 md:p-10 w-full max-w-xl flex flex-col items-center gap-6 text-center">
-            <h1 className="text-3xl md:text-4xl font-bold font-mono">No exam result found</h1>
+            <h1 className="text-3xl md:text-4xl font-bold font-heading">No exam result found</h1>
             <p className="text-sm md:text-base opacity-75">
               Take a mock exam first so this analytics page can display your score, domain mastery breakdown, and wrong question review.
             </p>
@@ -566,7 +566,7 @@ export default function MockExamResultsPage() {
           {/* Header Title */}
           <div className="flex flex-col gap-1 border-b-2 border-zinc-950 dark:border-zinc-600 pb-4">
             <div className="flex items-center justify-between flex-wrap gap-2">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-mono">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-heading">
                 EXAM RESULTS & ANALYTICS
               </h1>
               <span className="badge-brut bg-zinc-100 dark:bg-zinc-800 font-mono text-xs">
@@ -580,7 +580,7 @@ export default function MockExamResultsPage() {
           </div>
 
           {/* Top Section: Hero Score Card + Quick Actions & Telemetry */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             {/* Hero Score Card with SVG Radial Ring */}
             <div className="lg:col-span-5 card-brut p-6 sm:p-8 flex flex-col items-center justify-between text-center gap-6">
               <div className="flex flex-col items-center gap-2">
@@ -808,8 +808,8 @@ export default function MockExamResultsPage() {
                     {/* Horizontal Progress Bar */}
                     <div className="w-full h-3 bg-zinc-200 dark:bg-zinc-800 border border-zinc-950/25 dark:border-zinc-600/25">
                       <div
-                        style={{ width: `${catPct}%` }}
-                        className={`h-full transition-[width] duration-500 ${
+                        style={{ transform: `scaleX(${catPct / 100})` }}
+                        className={`h-full w-full origin-left transition-transform duration-300 ease-[var(--ease-out)] ${
                           catPct >= 70
                             ? "bg-emerald-600 dark:bg-emerald-500"
                             : catPct >= 50
@@ -847,8 +847,8 @@ export default function MockExamResultsPage() {
                                   </div>
                                   <div className="w-full h-1.5 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700">
                                     <div
-                                      style={{ width: `${topicPct}%` }}
-                                      className={`h-full ${
+                                      style={{ transform: `scaleX(${topicPct / 100})` }}
+                                      className={`h-full w-full origin-left ${
                                         topicPct >= 70
                                           ? "bg-emerald-600"
                                           : topicPct >= 50

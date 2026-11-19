@@ -94,8 +94,12 @@ export default function MockExamPage() {
   });
 
   const hasFinalizedRef = useRef(false);
+  // Direction of the last question move, so the card slides in from that side.
+  const [stepClass, setStepClass] = useState("motion-step-next");
   const elapsedSecondsRef = useRef(elapsedSeconds);
-  elapsedSecondsRef.current = elapsedSeconds;
+  useEffect(() => {
+    elapsedSecondsRef.current = elapsedSeconds;
+  }, [elapsedSeconds]);
 
   const questions = useMemo(() => session?.questions ?? [], [session]);
   const totalQuestions = questions.length;
@@ -258,7 +262,10 @@ export default function MockExamPage() {
   const moveToQuestion = useCallback(
     (nextIndex: number) => {
       const boundedIndex = Math.max(0, Math.min(totalQuestions - 1, nextIndex));
-      setCurrentIndex(boundedIndex);
+      setCurrentIndex((previous) => {
+        setStepClass(boundedIndex >= previous ? "motion-step-next" : "motion-step-prev");
+        return boundedIndex;
+      });
       setQuestionElapsedSeconds(0);
       setIsNavigatorOpen(false);
     },
@@ -497,11 +504,11 @@ export default function MockExamPage() {
       new Map<string, MockExamOption>(
         (currentQuestion?.options ?? []).map((option) => [option.key, option]),
       ),
-    [currentQuestion?.options],
+    [currentQuestion],
   );
   const eliminatedOptionSet = useMemo(
     () => new Set((currentQuestion && eliminatedOptionsByQuestion[currentQuestion.id]) ?? []),
-    [eliminatedOptionsByQuestion, currentQuestion?.id],
+    [eliminatedOptionsByQuestion, currentQuestion],
   );
 
   const renderedQuestionStem = useMemo(() => (
@@ -511,11 +518,11 @@ export default function MockExamPage() {
     >
       {normalizeMathDelimiters(normalizeLegacySymbols(currentQuestion?.questionText ?? ""))}
     </ReactMarkdown>
-  ), [currentQuestion?.questionText]);
+  ), [currentQuestion]);
 
   const renderedChoiceTexts = useMemo(() => {
     const map: Record<string, React.ReactNode> = {};
-    answerLetterKeys.forEach((letter) => {
+    (["A", "B", "C", "D"] as const).forEach((letter) => {
       const choice = optionByKey.get(letter);
       if (choice?.text) {
         map[letter] = (
@@ -577,13 +584,13 @@ export default function MockExamPage() {
       <div className="sticky top-0 z-40 bg-white dark:bg-zinc-950 border-b-2 border-zinc-950 dark:border-zinc-600">
         <div className="w-full h-1.5 bg-zinc-200 dark:bg-zinc-800">
           <div
-            style={{ width: `${totalQuestions > 0 ? (answeredCount / totalQuestions) * 100 : 0}%` }}
-            className="h-full bg-blue-600 dark:bg-blue-500 transition-[width] duration-300"
+            style={{ transform: `scaleX(${totalQuestions > 0 ? answeredCount / totalQuestions : 0})` }}
+            className="h-full w-full origin-left bg-blue-600 dark:bg-blue-500 transition-transform duration-300 ease-[var(--ease-out)]"
           />
         </div>
 
         {/* Sticky Top Exam HUD */}
-        <div className="px-3 sm:px-6 py-2.5 flex items-center justify-between gap-2 md:gap-4">
+        <div className="px-3 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-2 md:gap-4">
           {/* Left HUD: Counters & Badges */}
           <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
             <span className="badge-brut bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-mono">
@@ -691,6 +698,7 @@ export default function MockExamPage() {
               }`}
               title="Bookmark to Weak Spots deck [S]"
               aria-label="Bookmark question"
+              aria-pressed={isBookmarked}
             >
               <BookmarkSimpleIcon className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">{isBookmarked ? "SAVED" : "STAR"}</span>
@@ -781,7 +789,7 @@ export default function MockExamPage() {
 
       {/* Question Navigator Drawer / Popover */}
       {isNavigatorOpen ? (
-        <div className="border-b-2 border-zinc-950 dark:border-zinc-600 bg-white dark:bg-zinc-900 p-4 sm:p-6 shadow-xl animate-in slide-in-from-top duration-200">
+        <div className="border-b-2 border-zinc-950 dark:border-zinc-600 bg-white dark:bg-zinc-900 p-4 sm:p-6 shadow-xl motion-drop">
           <div className="max-w-5xl mx-auto flex flex-col gap-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4 flex-wrap">
@@ -851,7 +859,7 @@ export default function MockExamPage() {
       {/* Main Unified Question Body */}
       <main className="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-6 md:py-8 flex flex-col gap-6">
         {/* Unified Question Card */}
-        <div className="card-brut p-5 sm:p-7 md:p-9 flex flex-col gap-6">
+        <div key={currentIndex} className={`card-brut p-5 sm:p-7 md:p-9 flex flex-col gap-6 ${stepClass}`}>
           {/* Question Header & Meta Info */}
           <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-zinc-200 dark:border-zinc-800">
             <div className="flex items-center gap-2 flex-wrap">
@@ -996,7 +1004,7 @@ export default function MockExamPage() {
                   type="button"
                   onClick={() => handleSelectAnswer(letter)}
                   disabled={isDisabled}
-                  className={cardClasses}
+                  className={`${cardClasses} ${instantRevealEnabled && isSelected && !isCorrectOption ? "motion-shake" : ""}`}
                 >
                   <span className={badgeClasses}>{letter}</span>
 
@@ -1046,7 +1054,7 @@ export default function MockExamPage() {
 
           {/* Instant Answer Semantic Status Banner */}
           {instantRevealEnabled ? (
-            <div className="flex flex-col gap-3 mt-2">
+            <div className="flex flex-col gap-3 mt-2 motion-rise">
               {selectedAnswerIsCorrect ? (
                 <div className="border-2 border-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 p-4 flex items-center gap-3 text-emerald-950 dark:text-emerald-100 font-mono font-bold text-sm">
                   <CheckCircleIcon className="h-6 w-6 text-emerald-600 shrink-0" />
@@ -1073,7 +1081,7 @@ export default function MockExamPage() {
                   </button>
 
                   {explanationVisible ? (
-                    <div className="border-2 border-zinc-950 dark:border-zinc-600 bg-zinc-50 dark:bg-zinc-900 p-4 sm:p-5 flex flex-col gap-2 animate-in fade-in duration-200">
+                    <div className="border-2 border-zinc-950 dark:border-zinc-600 bg-zinc-50 dark:bg-zinc-900 p-4 sm:p-5 flex flex-col gap-2 motion-rise">
                       <p className="font-mono text-xs font-bold uppercase tracking-wider opacity-75">
                         Step-by-Step Solution
                       </p>

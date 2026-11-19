@@ -153,7 +153,57 @@ html.dark *::-webkit-scrollbar-thumb:hover {
   }
 }
 
+/* Motion: one easing/duration family for the whole site (subtle-motion) */
+:root {
+  --ease-out: cubic-bezier(.23, 1, .32, 1);
+  --ease-in: cubic-bezier(.55, 0, 1, .45);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --ease-settle: cubic-bezier(.34, 1.4, .64, 1);
+  --dur-press: 100ms;
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-slow: 300ms;
+  --rise: 8px;
+}
+
+@keyframes rise-in { from { opacity: 0; transform: translateY(var(--rise)); } }
+@keyframes drop-in { from { opacity: 0; transform: translateY(calc(var(--rise) * -1)); } }
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes panel-in { from { opacity: 0; transform: translateY(4px) scale(.98); } }
+@keyframes step-next { from { opacity: 0; transform: translateX(12px); } }
+@keyframes step-prev { from { opacity: 0; transform: translateX(-12px); } }
+@keyframes pop { from { transform: scale(.6); } }
+@keyframes shake { 20%, 60% { transform: translateX(-4px); } 40%, 80% { transform: translateX(4px); } }
+
+.motion-rise { animation: rise-in var(--dur-base) var(--ease-out) both; }
+.motion-drop { animation: drop-in var(--dur-fast) var(--ease-out) both; }
+.motion-fade { animation: fade-in var(--dur-fast) var(--ease-out) both; }
+.motion-step-next { animation: step-next var(--dur-fast) var(--ease-out) both; }
+.motion-step-prev { animation: step-prev var(--dur-fast) var(--ease-out) both; }
+.motion-shake { animation: shake 280ms var(--ease-in-out); }
+
+/* Toggled on (star, bookmark): the icon lands with a small overshoot. */
+[aria-pressed="true"] > svg:first-child { animation: pop var(--dur-slow) var(--ease-settle); }
+
+/* Below-the-fold groups rise in as they scroll into view. CSS only: browsers
+   without scroll timelines just show the content. */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: rise-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+}
+
+:focus-visible { transition: outline-offset var(--dur-fast) var(--ease-out); }
+
+/* Touch screens: every button and pill link is at least 44px tall (Fitts). */
+@media (pointer: coarse) {
+  button, a.inline-flex { min-height: 44px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  :root { --rise: 0px; }
   *,
   *::before,
   *::after {
